@@ -11,7 +11,9 @@ export default function OTPComponent({setIsProcessing}) {
     console.log(response.data) 
 		if(response.data.success) {
 			localStorage.setItem('token',response.data.token)
-		}
+		} else {
+      alert(response.data.message)
+    }
   }
   const BackToLogin = () => {
     setIsProcessing(false)
