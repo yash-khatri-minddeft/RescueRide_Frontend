@@ -1,0 +1,148 @@
+:root {
+  --thm-primary: #D11414;
+  --thm-primary-rgb: 209, 20, 20;
+  --thm-secondary: #d98a3d;
+  --thm-secondary-rgb: 217, 138, 61;
+  --thm-special: #325863;
+  --thm-special-rgb: 50, 88, 99;
+  --thm-gray: #e0d9d9;
+  --thm-gray-rgb: 224, 217, 217;
+  --thm-color: #160303;
+  --thm-color-rgb: 22, 3, 3;
+  --thm-border: #c4c4c4;
+  --thm-border-rgb: 196, 196, 196;
+  --thm-success: #19a319;
+  --thm-success-rgb: 25, 163, 25;
+  --thm-font: "Poppins", sans-serif;
+  --thm-heading: "Lato", sans-serif;
+}
+
+body {
+  margin: 0;
+  line-height: 1.5;
+  font-family: var(--thm-font);
+  font-weight: 500;
+}
+
+a {
+  font-weight: 500;
+  color: var(--thm-primary);
+  text-decoration: inherit;
+  transition: all 500ms ease;
+}
+a:hover {
+  color: var(--thm-secondary);
+}
+
+
+input {
+  outline: none;
+  border: 1px solid var(--thm-border);
+  border-radius: 4px;
+}
+
+input:focus {
+  border: 1px solid var(--thm-success);
+}
+
+button {
+  background-color: var(--thm-primary);
+  padding: 0.6em 2em;
+  border-radius: 4px;
+  color: #fff;
+  transition: all 500ms ease;
+}
+
+button:hover {
+  background-color: var(--thm-secondary);
+}
+
+.loader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: 1060;
+}
+.loader img {
+  position: relative;
+  width: 150px;
+  transform: skewX(15deg);
+  animation: loader 0.4s infinite linear;
+}
+@keyframes loader {
+  0%, 100% {
+    top: 10px;
+  }
+  50% {
+    top: -10px;
+  }
+}
+
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--thm-gray);
+  padding: 50px 0 80px;
+}
+
+.login-box {
+  background-color: #fff;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 8px;
+}
+
+.login-title {
+  position: relative;
+  margin-bottom: 40px;
+  display: inline-block;
+}
+
+.login-title::before {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  width: 70%;
+  height: 3px;
+  background-color: var(--thm-primary);
+}
+
+.login-input-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: flex-start;
+}
+
+.input-box label {
+  font-size: 18px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.input-box label span {
+  color: var(--thm-primary);
+}
+
+.input-box input {
+  padding: 10px;
+  outline: none;
+  width: 100%;
+}
+
+.input-box button {
+  width: 100%;
+}
