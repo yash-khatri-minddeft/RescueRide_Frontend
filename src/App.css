@@ -146,3 +146,85 @@ button:hover {
 .input-box button {
   width: 100%;
 }
+
+/* Header */
+.header {
+  position: relative;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--thm-border);
+  padding-right: 40px;
+  padding-left: 10px;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-left img {
+  width: 140px;
+}
+.header-inner ul {
+  margin-bottom: 0;
+}
+
+/* admin dashboard */
+.admin-dashboard {
+  position: relative;
+}
+
+/* sidebar */
+.sidebar {
+  background-color: #fff;
+  width: 400px;
+  min-height: calc(100vh - 111px);
+  height: 100%;
+  position: absolute;
+  overflow: auto;
+  top: 111px;
+  left: 0;
+  border-right: 1px solid var(--thm-border);
+}
+.sidebar ul {
+  display: flex;
+  flex-direction: column; 
+}
+.sidebar ul li {
+  border-bottom: 1px solid var(--thm-border);
+}
+.sidebar ul li a {
+  background-color: #fff;
+  display: flex;
+  font-size: 16px;
+  align-items: center;
+  column-gap: 10px;
+  padding: 17px 20px;
+}
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background-color: var(--thm-primary);
+  color: #fff;
+}
+.sidebar ul li a i {
+  font-size: 18px;
+}
+
+.admin-dashboard-inner {
+  margin-left: 400px;
+  padding-left: 40px;
+  padding-top: 50px;
+  padding-right: 12px;
+}
+
+.dashboard-header {
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+}
+.dashboard-header:before {
+  content: '';
+  position: absolute;
+  bottom: -13px;
+  width: 70%;
+  height: 3px;
+  background-color: var(--thm-primary);
+}
