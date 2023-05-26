@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-export default function AddHospitalComponent() {
+export default function HospitalComponent() {
   useEffect(() => {
     
   },)

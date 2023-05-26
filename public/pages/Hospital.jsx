@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import SideBar from '../components/SideBar'
 import Header from '../components/Header'
-import AdminDashBoardComponent from '../components/AdminDashBoardComponent'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import HospitalComponent from '../components/HospitalComponent'
+import { useNavigate } from 'react-router-dom';
 
-export default function AdminDashBoard({ checkLogin }) {
+export default function Hospital({checkLogin}) {
   const navigate = useNavigate();
   useEffect(() => {
     checkLogin().then((isLoggedIn) => {
@@ -18,7 +18,7 @@ export default function AdminDashBoard({ checkLogin }) {
       <div className="admin-dashboard">
         <Header />
         <SideBar />
-        <AdminDashBoardComponent />
+        <HospitalComponent />
       </div>
     </>
   )

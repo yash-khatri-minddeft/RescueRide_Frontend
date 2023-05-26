@@ -10,7 +10,6 @@ export default function OTPComponent({setIsProcessing, maskedEmail}) {
     const response = await axios.post('/api/admin/admin-otp', {
 			otp: otp.current.value,
 		})
-    console.log(response.data) 
 		if(response.data.success) {
 			localStorage.setItem('token',response.data.token)
 			navigate('/admin-dashboard')
