@@ -24,6 +24,7 @@ const RecenterAutomatically = ({ lat, lng }) => {
 export default function BookingMap({ longitude, latitude, setLatitude, setLongitude }) {
   const [hospitals, setHospitals] = useState();
   const locationName = useRef();
+  const [isInputAdded, setIsInputAdded] = useState(true);
 
   const handleLocationSubmit = async (e) => {
     e.preventDefault()
@@ -62,7 +63,7 @@ export default function BookingMap({ longitude, latitude, setLatitude, setLongit
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        <LeafletControlGeocoder setLatitude={setLatitude} setLongitude={setLongitude} />
+        {isInputAdded && <LeafletControlGeocoder setLatitude={setLatitude} setLongitude={setLongitude} />}
         <Marker position={position} icon={mapMarker} />
         <RecenterAutomatically lat={latitude} lng={longitude} />
         <MarkerClusterGroup>
