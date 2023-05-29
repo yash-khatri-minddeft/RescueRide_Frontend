@@ -9,6 +9,8 @@ import Controller from '../public/pages/Controller';
 import Hospital from '../public/pages/Hospital';
 import Ambulance from '../public/pages/Ambulance';
 import axios from 'axios';
+import UpdateCTRLPass from '../public/pages/UpdateCTRLPass';
+import ControllerDashboard from '../public/pages/ControllerDashboard';
 
 function App() {
   const checkLogin = async () => {
@@ -37,6 +39,8 @@ function App() {
           <Route path='/add-controller' element={<Controller checkLogin={checkLogin} />} />
           <Route path='/add-hospital' element={<Hospital checkLogin={checkLogin} />} />
           <Route path='/add-ambulance' element={<Ambulance checkLogin={checkLogin} />} />
+          <Route path='/change-ctrl-pasword' element={<UpdateCTRLPass />} />
+          <Route path='/controller-dashboard' element={<ControllerDashboard />} />
         </Routes>
       </BrowserRouter>
     </>

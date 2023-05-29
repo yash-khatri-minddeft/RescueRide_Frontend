@@ -55,10 +55,10 @@ export default function AddController({show, controllers, setControllers, onHide
             <div className="col-lg-6">
               <div className="input-box">
                 <label htmlFor="gender">Number: <span>*</span></label>
-                <select name="gender"  id="gender" required>
+                <select name="gender"  id="gender" required ref={gender}>
                   <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                   <option value="other">Other</option>
                 </select>
               </div>
