@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import logo from "../../src/assets/logo-main.png"
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 export default function Header() {
   const [username, setUsername] = useState();
   const token = localStorage.getItem('token');
@@ -30,10 +30,10 @@ export default function Header() {
           <img src={logo} className="img-fluid" alt="" />
         </div>
         {listItems &&
-          <ul className='list-unstyled ms-5'>
+          <ul className='list-unstyled header-nav ms-5'>
             {listItems?.map((list, key) => {
               return (
-                <li key={key}><Link to={list.link}>{list.text}</Link></li>
+                <li key={key}><NavLink to={list.link}>{list.text}</NavLink></li>
               )
             })}
           </ul>
