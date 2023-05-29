@@ -29,7 +29,6 @@ export default function ControllerComponent({ controllers, setModalShow }) {
             </tbody>
           </table>
         </div> : <>No controllers found. Please add some controllers from above button</>}
-
     </div>
   )
 }

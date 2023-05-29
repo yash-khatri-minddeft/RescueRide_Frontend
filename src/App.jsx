@@ -11,20 +11,29 @@ import Ambulance from '../public/pages/Ambulance';
 import axios from 'axios';
 import UpdateCTRLPass from '../public/pages/UpdateCTRLPass';
 import ControllerDashboard from '../public/pages/ControllerDashboard';
+import HomePage from '../public/pages/HomePage';
 
 function App() {
   const checkLogin = async () => {
+
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
-      const response = await axios.get('/api/admin/checkLogin', {
+      const isAdmin = axios.get('/api/admin/checkLogin', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
-      })
-      if(!response.data.isLoggedIn) {
+      }).then(response => {
+        if (!response.data.isAdmin) {
+          return false;
+        }
+        return response.data.isAdmin;
+      }).catch(err => {
+        if (err.response && err.response.status === 404) {
+          console.log(err.response  .data.message)
+        }
         return false;
-      }
-      return true;
+      })
+      return isAdmin;
     } else {
       return false;
     }
@@ -33,7 +42,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Navigate to='/admin-signin' />} />
+          <Route path='/' element={<HomePage/>} />
           <Route path='/admin-signin' element={<AdminSignIn checkLogin={checkLogin} />} />
           <Route path='/admin-dashboard' element={<AdminDashBoard checkLogin={checkLogin} />} />
           <Route path='/add-controller' element={<Controller checkLogin={checkLogin} />} />

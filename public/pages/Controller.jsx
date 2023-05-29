@@ -15,6 +15,7 @@ export default function Controller({ checkLogin }) {
   const navigate = useNavigate();
   useEffect(() => {
     checkLogin().then((isLoggedIn) => {
+      console.log(isLoggedIn)
       if (!isLoggedIn) {
         navigate('/')
       }
