@@ -30,22 +30,32 @@ a {
   text-decoration: inherit;
   transition: all 500ms ease;
 }
+
 a:hover {
   color: var(--thm-secondary);
 }
 
+select {
+  background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+  background-position: calc(100% - 10px) center !important;
+  -moz-appearance: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
 
-input {
+input,
+select {
   outline: none;
   border: 1px solid var(--thm-border);
   border-radius: 4px;
 }
 
-input:focus {
+input:focus,
+select:focus {
   border: 1px solid var(--thm-success);
 }
 
-button:not(.btn-close,.Toastify__close-button) {
+button:not(.btn-close, .Toastify__close-button) {
   background-color: var(--thm-primary);
   padding: 0.6em 2em;
   border-radius: 4px;
@@ -53,7 +63,7 @@ button:not(.btn-close,.Toastify__close-button) {
   transition: all 500ms ease;
 }
 
-button:not(.btn-close,.Toastify__close-button):hover {
+button:not(.btn-close, .Toastify__close-button):hover {
   background-color: var(--thm-secondary);
 }
 
@@ -69,16 +79,21 @@ button:not(.btn-close,.Toastify__close-button):hover {
   background-color: rgba(255, 255, 255, 0.6);
   z-index: 1060;
 }
+
 .loader img {
   position: relative;
   width: 150px;
   transform: skewX(15deg);
   animation: loader 0.4s infinite linear;
 }
+
 @keyframes loader {
-  0%, 100% {
+
+  0%,
+  100% {
     top: 10px;
   }
+
   50% {
     top: -10px;
   }
@@ -137,7 +152,8 @@ button:not(.btn-close,.Toastify__close-button):hover {
   color: var(--thm-primary);
 }
 
-.input-box input {
+.input-box input,
+.input-box select {
   padding: 10px;
   outline: none;
   width: 100%;
@@ -155,14 +171,17 @@ button:not(.btn-close,.Toastify__close-button):hover {
   padding-right: 40px;
   padding-left: 10px;
 }
+
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .logo-left img {
   width: 140px;
 }
+
 .header-inner ul {
   margin-bottom: 0;
 }
@@ -184,13 +203,16 @@ button:not(.btn-close,.Toastify__close-button):hover {
   left: 0;
   border-right: 1px solid var(--thm-border);
 }
+
 .sidebar ul {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
+
 .sidebar ul li {
   border-bottom: 1px solid var(--thm-border);
 }
+
 .sidebar ul li a,
 .sidebar ul li .logout {
   background-color: #fff;
@@ -203,12 +225,14 @@ button:not(.btn-close,.Toastify__close-button):hover {
   transition: all 500ms ease;
   cursor: pointer;
 }
+
 .sidebar ul li a:hover,
 .sidebar ul li .logout:hover,
 .sidebar ul li a.active {
   background-color: var(--thm-primary);
   color: #fff;
 }
+
 .sidebar ul li a i {
   font-size: 18px;
 }
@@ -225,6 +249,7 @@ button:not(.btn-close,.Toastify__close-button):hover {
   position: relative;
   display: inline-block;
 }
+
 .dashboard-header:before {
   content: '';
   position: absolute;
@@ -250,9 +275,11 @@ button:not(.btn-close,.Toastify__close-button):hover {
 .controller-modal .modal-dialog {
   max-width: 720px;
 }
+
 .controller-modal .modal-header {
   padding: 20px 30px;
 }
+
 .controller-modal .modal-body {
   padding: 30px;
 }

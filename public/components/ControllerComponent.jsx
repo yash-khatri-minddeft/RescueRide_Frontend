@@ -16,9 +16,10 @@ export default function ControllerComponent({ controllers, setModalShow }) {
           <table className='table'>
             <thead>
               <tr>
-                <th>Controller Name</th>
-                <th>Controller Email</th>
-                <th>Controller PhoneNo</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>PhoneNo</th>
               </tr>
             </thead>
             <tbody>

@@ -8,7 +8,7 @@ export default function AddController({show, controllers, setControllers, onHide
   const name = useRef();
   const number = useRef();
   const email = useRef();
-  const password = useRef();
+  const gender = useRef();
 
   const handleSubmit = async e => {
     const token = localStorage.getItem('token');
@@ -17,7 +17,7 @@ export default function AddController({show, controllers, setControllers, onHide
       name: name.current.value,
       email: email.current.value,
       phoneNo: number.current.value,
-      password: password.current.value
+      gender: gender.current.value
     }, {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -54,14 +54,19 @@ export default function AddController({show, controllers, setControllers, onHide
             </div>
             <div className="col-lg-6">
               <div className="input-box">
-                <label htmlFor="email">E-mail: <span>*</span></label>
-                <input type="email" id='email' required ref={email} />
+                <label htmlFor="gender">Number: <span>*</span></label>
+                <select name="gender"  id="gender" required>
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
             </div>
             <div className="col-lg-6">
               <div className="input-box">
-                <label htmlFor="password">Password: <span>*</span></label>
-                <input type="password" id='password' required ref={password} />
+                <label htmlFor="email">E-mail: <span>*</span></label>
+                <input type="email" id='email' required ref={email} />
               </div>
             </div>
             <div className="col-lg-12">
