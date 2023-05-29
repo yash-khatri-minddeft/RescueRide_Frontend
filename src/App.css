@@ -55,16 +55,30 @@ select:focus {
   border: 1px solid var(--thm-success);
 }
 
-button:not(.btn-close, .Toastify__close-button) {
+button:not(.btn-close, .Toastify__close-button),
+.button {
   background-color: var(--thm-primary);
+  display: inline-block;
   padding: 0.6em 2em;
   border-radius: 4px;
   color: #fff;
   transition: all 500ms ease;
 }
 
-button:not(.btn-close, .Toastify__close-button):hover {
+button:not(.btn-close, .Toastify__close-button):hover,
+.button {
   background-color: var(--thm-secondary);
+}
+
+button.button-white,
+.button.button-white {
+  background-color: #fff;
+  color: var(--thm-primary);
+}
+button.button-white:hover,
+.button.button-white:hover {
+  color: #fff;
+  background-color: var(--thm-primary);
 }
 
 .loader {
@@ -282,4 +296,26 @@ button:not(.btn-close, .Toastify__close-button):hover {
 
 .admin-modal .modal-body {
   padding: 30px;
+}
+
+/* banner */
+
+.banner-swiper-inner {
+  position: relative;
+  padding: 120px 0;
+  height: calc(100vh - 111px);
+  background-color: var(--thm-special);
+  display: flex;
+  align-items: center;
+}
+.banner-title {
+  margin-bottom: 30px;
+  color: #fff;
+}
+.banner-text {
+  max-width: 600px;
+  color: #fff;
+  margin-bottom: 25px;
+  font-weight: 400;
+  font-size: 18px;
 }
