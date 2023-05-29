@@ -272,14 +272,14 @@ button:not(.btn-close, .Toastify__close-button):hover {
   padding: 10px 20px;
 }
 
-.controller-modal .modal-dialog {
+.admin-modal .modal-dialog {
   max-width: 720px;
 }
 
-.controller-modal .modal-header {
+.admin-modal .modal-header {
   padding: 20px 30px;
 }
 
-.controller-modal .modal-body {
+.admin-modal .modal-body {
   padding: 30px;
 }

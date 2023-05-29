@@ -33,7 +33,7 @@ export default function AddController({show, controllers, setControllers, onHide
     }
   }
   return (
-    <Modal show={show} onHide={onHide} className='controller-modal'>
+    <Modal show={show} onHide={onHide} className='admin-modal'>
       <ModalHeader closeButton>
         <Modal.Title>Add Controllers</Modal.Title>
       </ModalHeader>
