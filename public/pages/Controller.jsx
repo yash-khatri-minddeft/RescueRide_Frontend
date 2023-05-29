@@ -5,11 +5,13 @@ import ControllerComponent from '../components/ControllerComponent'
 import { useNavigate } from 'react-router-dom';
 import AddController from '../components/AddController';
 import axios from 'axios';
+import Loader from '../components/Loader';
 
 export default function Controller({ checkLogin }) {
   const token = localStorage.getItem('token')
   const [controllers, setControllers] = useState();
   const [modalShow, setModalShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     checkLogin().then((isLoggedIn) => {
@@ -23,10 +25,10 @@ export default function Controller({ checkLogin }) {
           'Authorization': `Bearer ${token}`
         }
       })
-  
       if (response.data.success) {
         setControllers(response.data.data)
       }
+      setIsLoading(false)
     }
     getControllers()
   }, [])
@@ -34,6 +36,7 @@ export default function Controller({ checkLogin }) {
   return (
     <>
       <div className="admin-dashboard">
+        {isLoading && <Loader />}
         <Header />
         <SideBar />
         <ControllerComponent controllers={controllers} setModalShow={setModalShow} />
