@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import logo from "../../src/assets/logo-main.png"
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 export default function Header() {
   const [username, setUsername] = useState();
   const token = localStorage.getItem('token');
@@ -27,7 +27,7 @@ export default function Header() {
     <div className="header">
       <div className="header-inner">
         <div className="logo-left">
-          <img src={logo} className="img-fluid" alt="" />
+          <Link to='/'><img src={logo} className="img-fluid" alt="" /></Link>
         </div>
         {listItems &&
           <ul className='list-unstyled header-nav ms-5'>
