@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import BookingMap from '../components/BookingMap';
+import { ToastContainer } from 'react-toastify';
 
 export default function BookAmbulance() {
   const [longitude, setLongitude] = useState(50);
@@ -22,6 +23,7 @@ export default function BookAmbulance() {
       setErrorMessage("Geolocation is not supported by this browser please enter your location");
     }
   }, [])
+
   return (
     <div className="book-ambulance">
       <Header />

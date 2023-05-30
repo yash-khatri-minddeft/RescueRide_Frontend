@@ -20,6 +20,7 @@ export default function ControllerComponent({ controllers, setModalShow }) {
                 <th>Email</th>
                 <th>Gender</th>
                 <th>PhoneNo</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>

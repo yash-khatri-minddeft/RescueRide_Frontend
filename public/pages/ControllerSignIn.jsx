@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import AdminSignInComponent from '../components/AdminSignInComponent'
-import OTPComponent from '../components/OTPComponent';
+import { ToastContainer, toast } from 'react-toastify'
+import OTPComponent from '../components/OTPComponent'
 import logo from '../../src/assets/logo.png'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import AdminSignInComponent from '../components/AdminSignInComponent'
 import { useNavigate } from 'react-router-dom';
+import ControllerSignInComponent from '../components/ControllerSignInComponent'
 
-export default function AdminSignIn({ checkLogin }) {
+export default function ControllerSignIn({checkCTRLLogin}) {
   const [isProcessing, setIsProcessing] = useState();
   const [maskedEmail, setMaskedEmail] = useState();
   const [isLoading, setIsLoading] = useState();
@@ -19,9 +19,10 @@ export default function AdminSignIn({ checkLogin }) {
       toast.error(toastText.text)
     }
 
-    checkLogin().then((isLoggedIn) => {
+    checkCTRLLogin().then((isLoggedIn) => {
+      console.log(isLoggedIn)
       if (isLoggedIn) {
-        navigate('/admin-dashboard')
+        navigate('/controller-dashboard')
       }
     });
   }, [toastText])
@@ -32,8 +33,8 @@ export default function AdminSignIn({ checkLogin }) {
           <img src={logo} className='img-fluid' alt="" />
         </div>
         {!isProcessing ?
-          <AdminSignInComponent setIsProcessing={setIsProcessing} setToastText={setToastText} setMaskedEmail={setMaskedEmail} isLoading={isLoading} setIsLoading={setIsLoading} /> :
-          <OTPComponent setIsProcessing={setIsProcessing} maskedEmail={maskedEmail} userType='admin' />
+          <ControllerSignInComponent setIsProcessing={setIsProcessing} setToastText={setToastText} setMaskedEmail={setMaskedEmail} isLoading={isLoading} setIsLoading={setIsLoading} /> :
+          <OTPComponent setIsProcessing={setIsProcessing} maskedEmail={maskedEmail} userType='controller' />
         }
         <ToastContainer />
       </div>

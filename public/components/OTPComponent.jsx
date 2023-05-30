@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export default function OTPComponent({setIsProcessing, maskedEmail}) {
+export default function OTPComponent({setIsProcessing, maskedEmail, userType}) {
   const otp = useRef();
 	const navigate = useNavigate();
   const handleSubmit = async(e) => {
@@ -12,7 +12,7 @@ export default function OTPComponent({setIsProcessing, maskedEmail}) {
 		})
 		if(response.data.success) {
 			localStorage.setItem('token',response.data.token)
-			navigate('/admin-dashboard')
+			navigate(`/${userType}-dashboard`)
 		} else {
       alert(response.data.message)
     }

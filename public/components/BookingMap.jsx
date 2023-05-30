@@ -29,11 +29,11 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
   const [userEmail, setUserEmail] = useState();
   const [hospitalID, setHospitalID] = useState();
   const [modalShow, setModalShow] = useState(false);
+  const [toastMsg, setToastMsg] = useState({type:'', message:''});
   useEffect(() => {
     axios.post('/api/controller/user-gethospital', { latitude: latitude, longitude: longitude })
       .then(response => {
         setHospitals(response.data.data)
-        console.log(response.data.data)
       })
   }, [latitude, longitude])
 
@@ -42,6 +42,14 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
       toast.error(errorMessage)
     }
   }, [errorMessage])
+
+  useEffect(() => {
+    if(toastMsg.type == 'success') {
+      toast.success(toastMsg.message)
+    } else if(toastMsg.type == 'error') {
+      toast.error(toastMsg.message)
+    }
+  },[toastMsg])
 
   const ambulanceIcon = new Icon({
     iconUrl: icon,
@@ -98,7 +106,7 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
           })}
         </MarkerClusterGroup>
       </MapContainer>
-      <BookPopup longitude={longitude} latitude={latitude} modalShow={modalShow} setModalShow={setModalShow} hospitalID={hospitalID} />
+      <BookPopup longitude={longitude} latitude={latitude} modalShow={modalShow} setModalShow={setModalShow} hospitalID={hospitalID} toastMsg={toastMsg} setToastMsg={setToastMsg} />
     </div>
   )
 }

@@ -3,21 +3,29 @@ import React, { useRef } from 'react'
 import Modal from "react-bootstrap/Modal";
 import ModalHeader from "react-bootstrap/esm/ModalHeader";
 
-export default function BookPopup({ longitude, latitude, modalShow, setModalShow, hospitalID }) {
+export default function BookPopup({ longitude, latitude, modalShow, setModalShow, hospitalID, toastMsg, setToastMsg }) {
 	const username = useRef();
 	const number = useRef();
 	const type = useRef();
 	const handleSubmit = async e => {
 		e.preventDefault();
-		axios.post('/api/contoller/add-booking', {
+		axios.post('/api/controller/add-booking', {
 			username: username.current.value,
 			number: number.current.value,
 			user_longitude: longitude,
 			user_latitude: latitude,
 			hospitalid: hospitalID,
 			type_of_ambulance: type.current.value
-		}).then((response) => console.log(response))
-			.catch((err) => {
+		}).then((response) => {
+			console.log(response)
+			if(response.data.success) {
+				setModalShow(false)
+				setToastMsg({type:'success',message:'Ambulance Booking is Pending.Please wait for confirmation'})
+				localStorage.setItem('bookingID',response.data.data._id)
+			}
+		})
+		.catch((err) => {
+			setToastMsg({type:'error',message:'Error while booking Ambulance!'})
 				console.log(err.response)
 			})
 	}
