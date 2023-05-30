@@ -11,8 +11,8 @@ export default function LeafletControlGeocoder({ setLatitude, setLongitude, setI
   useEffect(() => {
     const geocoderElement = document.querySelector('.leaflet-control-geocoder ')
     if (!geocoderElement) {
-
       var geocoder = L.Control.Geocoder.nominatim();
+      console.log(geocoder)
       if (typeof URLSearchParams !== "undefined" && location.search) {
         // parse /?geocoder=nominatim from URL
         var params = new URLSearchParams(location.search);
@@ -34,7 +34,6 @@ export default function LeafletControlGeocoder({ setLatitude, setLongitude, setI
           setLatitude(latlng.lat)
           setLongitude(latlng.lng)
           L.marker(latlng, { icon })
-            // .addTo(map)
             .bindPopup(e.geocode.name)
             .openPopup();
           map.fitBounds(e.geocode.bbox);

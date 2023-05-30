@@ -13,6 +13,7 @@ import UpdateCTRLPass from '../public/pages/UpdateCTRLPass';
 import ControllerDashboard from '../public/pages/ControllerDashboard';
 import HomePage from '../public/pages/HomePage';
 import BookAmbulance from '../public/pages/BookAmbulance';
+import TestMap from '../public/components/testmap';
 
 function App() {
   const checkLogin = async () => {
@@ -52,6 +53,7 @@ function App() {
           <Route path='/change-ctrl-pasword' element={<UpdateCTRLPass />} />
           <Route path='/controller-dashboard' element={<ControllerDashboard />} />
           <Route path='/book-ambulance' element={<BookAmbulance />} />
+          <Route path='/test-map' element={<TestMap />} />
         </Routes>
       </BrowserRouter>
     </>
