@@ -15,6 +15,8 @@ export default function BookAmbulance() {
         if (err.code === 1) {
           setErrorMessage('Please turn on location from settings or enter your location')
         }
+      },{
+        enableHighAccuracy: true,
       });
     } else {
       setErrorMessage("Geolocation is not supported by this browser please enter your location");
