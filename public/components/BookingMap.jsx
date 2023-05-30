@@ -99,7 +99,7 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
           })}
         </MarkerClusterGroup>
       </MapContainer>
-      <BookPopup modalShow={modalShow} setModalShow={setModalShow} hospitalID={hospitalID} />
+      <BookPopup longitude={longitude} latitude={latitude} modalShow={modalShow} setModalShow={setModalShow} hospitalID={hospitalID} />
     </div>
   )
 }

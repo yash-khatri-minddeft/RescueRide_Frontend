@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css';
-import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AdminSignIn from '../public/pages/AdminSignIn';
 import AdminDashBoard from '../public/pages/AdminDashBoard';
 import Controller from '../public/pages/Controller';
@@ -13,7 +11,6 @@ import UpdateCTRLPass from '../public/pages/UpdateCTRLPass';
 import ControllerDashboard from '../public/pages/ControllerDashboard';
 import HomePage from '../public/pages/HomePage';
 import BookAmbulance from '../public/pages/BookAmbulance';
-import TestMap from '../public/components/testmap';
 
 function App() {
   const checkLogin = async () => {
@@ -53,7 +50,6 @@ function App() {
           <Route path='/change-ctrl-pasword' element={<UpdateCTRLPass />} />
           <Route path='/controller-dashboard' element={<ControllerDashboard />} />
           <Route path='/book-ambulance' element={<BookAmbulance />} />
-          <Route path='/test-map' element={<TestMap />} />
         </Routes>
       </BrowserRouter>
     </>
