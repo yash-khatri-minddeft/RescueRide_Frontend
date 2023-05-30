@@ -8,7 +8,6 @@ import mapIcon from './../../src/assets/images/map-marker.png'
 import { Icon } from 'leaflet';
 import axios from 'axios';
 import LeafletControlGeocoder from './LeafletControlGeocoder';
-import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 import { ToastContainer, toast } from 'react-toastify';
 import BookPopup from './BookPopup';
 
