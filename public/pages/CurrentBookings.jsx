@@ -4,7 +4,7 @@ import ClientBookingList from '../components/ClientBookingList';
 import Loader from '../components/Loader';
 import axios from 'axios';
 
-export default function BookingList({ checkLogin, checkCTRLLogin }) {
+export default function CurrentBookings({ checkLogin, checkCTRLLogin }) {
   const [userType, setUserType] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -27,9 +27,8 @@ export default function BookingList({ checkLogin, checkCTRLLogin }) {
   useEffect(() => {
     return () => {
       if (localBooking.length) {
-
         localBooking.map((id) => {
-          axios.post('api/controller/get-pending-booking', { id: id, status: 'pending' })
+          axios.post('api/controller/get-pending-booking', { id: id, status: 'current' })
             .then(response => {
               if (response.data.data != null) {
                 setBookings((bookings) => [...bookings, response.data.data])

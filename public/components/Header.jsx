@@ -2,10 +2,18 @@ import React, { useEffect, useState } from 'react'
 import logo from "../../src/assets/logo-main.png"
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
-export default function Header( {userType = 'guest'} ) {
+export default function Header({ userType = 'guest' }) {
   const [username, setUsername] = useState();
-  const token = localStorage.getItem( 'token');
-  const [listItems, setListItems] = useState([{ text: 'Book Ambulance', link: '/book-ambulance' }]);
+  const token = localStorage.getItem('token');
+
+  const listItems = [
+    { text: 'Home', link: '/' },
+    { text: 'Book Ambulance', link: '/book-ambulance' },
+    { text: 'Pending Booking', link: '/booking-list' },
+    { text: 'Current Booking', link: '/current-booking' },
+    { text: 'History', link: '/history-booking' }
+  ];
+
   useEffect(() => {
     const getUserName = async () => {
       const response = await axios.get(`/api/${userType}/getUserData`, {

@@ -21,16 +21,16 @@ export default function BookPopup({ longitude, latitude, modalShow, setModalShow
 			type_of_ambulance: type.current.value
 		}).then((response) => {
 			console.log(response)
-			if(response.data.success) {
+			if (response.data.success) {
 				setModalShow(false)
-				setToastMsg({type:'success',message:'Ambulance Booking is Pending.Please wait for confirmation'})
+				setToastMsg({ type: 'success', message: 'Ambulance Booking is Pending.Please wait for confirmation' })
 				localBooking.push(response.data.data._id)
-				localStorage.setItem('bookingID',JSON.stringify(localBooking))
+				localStorage.setItem('bookingID', JSON.stringify(localBooking))
 				navigate('/booking-list')
 			}
 		})
-		.catch((err) => {
-			setToastMsg({type:'error',message:'Error while booking Ambulance!'})
+			.catch((err) => {
+				setToastMsg({ type: 'error', message: 'Error while booking Ambulance!' })
 				console.log(err)
 			})
 	}

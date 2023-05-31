@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function ClientBookingList({id}) {
-  useEffect(() => {
-    
-  },[])
+export default function ClientBookingList({ id, hospitalName, status }) {
+
   return (
     <>
-      <li><Link to={`/booking-list/${id}`}>{id}</Link></li>
+      <tr>
+        <td><Link to={`/booking-list/${id}`}>{id}</Link></td>
+        <td>{hospitalName}</td>
+        <td><span>{status}</span></td>
+      </tr>
     </>
   )
 }

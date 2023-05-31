@@ -14,6 +14,8 @@ import BookAmbulance from '../public/pages/BookAmbulance';
 import ControllerSignIn from '../public/pages/ControllerSignIn';
 import BookingList from '../public/pages/BookingList';
 import BookingDetailMap from '../public/components/BookingDetailMap';
+import CurrentBookings from '../public/pages/CurrentBookings';
+import Historybooking from '../public/pages/HistoryBookings';
 
 function App() {
   const [userType, setUserType] = useState('guest');
@@ -85,6 +87,8 @@ function App() {
           <Route path='/controller-dashboard' element={<ControllerDashboard checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/book-ambulance' element={<BookAmbulance checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/booking-list' element={<BookingList checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
+          <Route path='/current-booking' element={<CurrentBookings checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
+          <Route path='/history-booking' element={<Historybooking checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/booking-list/:bookingId' element={<BookingDetailMap checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
         </Routes>
       </BrowserRouter>
