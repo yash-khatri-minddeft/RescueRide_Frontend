@@ -27,7 +27,6 @@ export default function BookingList({ checkLogin, checkCTRLLogin }) {
   useEffect(() => {
     return () => {
       if (localBooking.length) {
-
         localBooking.map((id) => {
           axios.post('api/controller/get-pending-booking', { id: id, status: 'pending' })
             .then(response => {
@@ -57,9 +56,7 @@ export default function BookingList({ checkLogin, checkCTRLLogin }) {
       <div className="booking-list">
         <div className="container">
           <div className="table-responsive">
-            {console.log(bookings)}
             {bookings?.length ?
-              <>
                 <table className='table'>
                   <thead>
                     <tr>
@@ -73,8 +70,7 @@ export default function BookingList({ checkLogin, checkCTRLLogin }) {
                       return (<ClientBookingList key={key} hospitalName={hospitalName[key]} id={booking._id} status={booking.status} />)
                     })}
                   </tbody>
-                </table>
-              </> :
+                </table> :
               <>No Bookings found</>
             }
           </div>
