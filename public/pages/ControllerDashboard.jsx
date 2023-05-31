@@ -7,9 +7,9 @@ export default function ControllerDashboard({checkCTRLLogin}) {
   useEffect(() => {
     checkCTRLLogin().then((isLoggedIn) => {
       console.log(isLoggedIn);
-      // if (!isLoggedIn) {
-      //   navigate('/')
-      // }
+      if (!isLoggedIn) {
+        navigate('/')
+      }
     });
   })
   return (
