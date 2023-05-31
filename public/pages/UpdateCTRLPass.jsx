@@ -22,7 +22,7 @@ export default function UpdateCTRLPass() {
       localStorage.setItem('token',response.data.token)
       navigate('/controller-dashboard')
     } else {
-      toast.error(response.data.error)
+      toast.error(response.data.message)
     }
   }
   return (
