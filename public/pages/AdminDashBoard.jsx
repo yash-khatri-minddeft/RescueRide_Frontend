@@ -16,7 +16,7 @@ export default function AdminDashBoard({ checkLogin }) {
   return (
     <>
       <div className="admin-dashboard">
-        <Header />
+        <Header userType='admin'/>
         <SideBar />
         <AdminDashBoardComponent />
       </div>

@@ -36,7 +36,7 @@ export default function Hospital({checkLogin}) {
     <>
       <div className="admin-dashboard">
       {isLoading && <Loader />}
-        <Header />
+        <Header userType="admin" />
         <SideBar />
         <HospitalComponent hospitals={hospitals} setModalShow={setModalShow}/>
         <AddHospital show={modalShow} hospitals={hospitals} setHospitals={setHospitals} onHide={() => setModalShow(false)}/>

@@ -14,7 +14,7 @@ export default function ControllerDashboard({checkCTRLLogin}) {
   })
   return (
     <div className="contoller-dashboard">
-      <Header />
+      <Header userType="controller" />
     </div>
   )
 }

@@ -1,12 +1,15 @@
 import axios from 'axios';
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Modal from "react-bootstrap/Modal";
 import ModalHeader from "react-bootstrap/esm/ModalHeader";
+import { useNavigate } from 'react-router-dom';
 
 export default function BookPopup({ longitude, latitude, modalShow, setModalShow, hospitalID, toastMsg, setToastMsg }) {
 	const username = useRef();
 	const number = useRef();
 	const type = useRef();
+	const navigate = useNavigate();
+	const localBooking = JSON.parse(localStorage.getItem('bookingID')) || [];
 	const handleSubmit = async e => {
 		e.preventDefault();
 		axios.post('/api/controller/add-booking', {
@@ -21,12 +24,14 @@ export default function BookPopup({ longitude, latitude, modalShow, setModalShow
 			if(response.data.success) {
 				setModalShow(false)
 				setToastMsg({type:'success',message:'Ambulance Booking is Pending.Please wait for confirmation'})
-				localStorage.setItem('bookingID',response.data.data._id)
+				localBooking.push(response.data.data._id)
+				localStorage.setItem('bookingID',JSON.stringify(localBooking))
+				navigate('/booking-list')
 			}
 		})
 		.catch((err) => {
 			setToastMsg({type:'error',message:'Error while booking Ambulance!'})
-				console.log(err.response)
+				console.log(err)
 			})
 	}
 	return (
@@ -52,7 +57,7 @@ export default function BookPopup({ longitude, latitude, modalShow, setModalShow
 								<label htmlFor="phoneno">
 									Your Number: <span>*</span>
 								</label>
-								<input type="text" id="phoneno" required ref={number} />
+								<input type="number" id="phoneno" required ref={number} />
 							</div>
 						</div>
 						<div className="col-lg-12">

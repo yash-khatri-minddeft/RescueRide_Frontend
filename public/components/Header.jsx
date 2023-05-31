@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import logo from "../../src/assets/logo-main.png"
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
-export default function Header() {
+export default function Header( {userType = 'guest'} ) {
   const [username, setUsername] = useState();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem( 'token');
   const [listItems, setListItems] = useState([{ text: 'Book Ambulance', link: '/book-ambulance' }]);
   useEffect(() => {
     const getUserName = async () => {
-      const response = await axios.get('/api/admin/getUserData', {
+      const response = await axios.get(`/api/${userType}/getUserData`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -17,12 +17,12 @@ export default function Header() {
         setUsername(`Hello, ${response.data.data.name}`)
       }
     }
-    if (token) {
+    if (token && userType !== 'guest') {
       getUserName()
     } else {
       setUsername('Hello, Guest!')
     }
-  }, [])
+  }, [userType])
   return (
     <div className="header">
       <div className="header-inner">

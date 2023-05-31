@@ -12,8 +12,11 @@ import ControllerDashboard from '../public/pages/ControllerDashboard';
 import HomePage from '../public/pages/HomePage';
 import BookAmbulance from '../public/pages/BookAmbulance';
 import ControllerSignIn from '../public/pages/ControllerSignIn';
+import BookingList from '../public/pages/BookingList';
+import BookingDetailMap from '../public/components/BookingDetailMap';
 
 function App() {
+  const [userType, setUserType] = useState('guest');
   const checkLogin = async () => {
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
@@ -25,11 +28,13 @@ function App() {
         if (!response.data.isAdmin) {
           return false;
         }
+        setUserType('admin')
         return response.data.isAdmin;
       }).catch(err => {
-        if (err.response && err.response.status === 404) {
-          console.log(err.response .data.message)
-        }
+        // if (err) {
+        //   return false;
+        //   console.log(err.response.data.message)
+        // }
         return false;
       })
       return isAdmin;
@@ -51,6 +56,7 @@ function App() {
         if(!response.data.isController) {
           return false;
         }
+        setUserType('controller')
         return response.data.isController;
       }).catch(err => {
         if (err.response && err.response.status === 404) {
@@ -68,7 +74,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<HomePage/>} />
+          <Route path='/' element={<HomePage checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/admin-signin' element={<AdminSignIn checkLogin={checkLogin} />} />
           <Route path='/admin-dashboard' element={<AdminDashBoard checkLogin={checkLogin} />} />
           <Route path='/add-controller' element={<Controller checkLogin={checkLogin} />} />
@@ -77,7 +83,9 @@ function App() {
           <Route path="/controller-signin" element={<ControllerSignIn checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/change-ctrl-pasword' element={<UpdateCTRLPass />} />
           <Route path='/controller-dashboard' element={<ControllerDashboard checkCTRLLogin={checkCTRLLogin} />} />
-          <Route path='/book-ambulance' element={<BookAmbulance />} />
+          <Route path='/book-ambulance' element={<BookAmbulance checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
+          <Route path='/booking-list' element={<BookingList checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
+          <Route path='/booking-list/:bookingId' element={<BookingDetailMap checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
         </Routes>
       </BrowserRouter>
     </>

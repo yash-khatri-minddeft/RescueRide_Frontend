@@ -36,7 +36,7 @@ export default function Ambulance({checkLogin}) {
     <>
       <div className="admin-dashboard">
       {isLoading && <Loader />}
-        <Header />
+        <Header userType="admin"/>
         <SideBar />
         <AmbulanceComponent ambulances={ambulances} setModalShow={setModalShow}/>
         <AddAmbulance show={modalShow} ambulances={ambulances} setAmbulances={setAmbulances} onHide={() => setModalShow(false)}/>

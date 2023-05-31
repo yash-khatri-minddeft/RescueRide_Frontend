@@ -37,7 +37,7 @@ export default function Controller({ checkLogin }) {
     <>
       <div className="admin-dashboard">
         {isLoading && <Loader />}
-        <Header />
+        <Header userType="admin" />
         <SideBar />
         <ControllerComponent controllers={controllers} setModalShow={setModalShow} />
         <AddController show={modalShow} controllers={controllers} setControllers={setControllers} onHide={() => setModalShow(false)} />

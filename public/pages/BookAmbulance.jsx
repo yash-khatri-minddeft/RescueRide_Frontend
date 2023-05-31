@@ -3,10 +3,23 @@ import Header from '../components/Header'
 import BookingMap from '../components/BookingMap';
 import { ToastContainer } from 'react-toastify';
 
-export default function BookAmbulance() {
+export default function BookAmbulance({checkLogin, checkCTRLLogin}) {
   const [longitude, setLongitude] = useState(50);
   const [latitude, setLatitude] = useState(50);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [userType, setUserType] = useState();
+  useEffect(() => {
+    checkLogin().then((isLoggedIn) => {
+      if(isLoggedIn) {
+        setUserType('admin')
+      }
+    });
+    checkCTRLLogin().then((isLoggedIn) => {
+      if(isLoggedIn) {
+        setUserType('controller')
+      }
+    });
+  },[])
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -26,7 +39,7 @@ export default function BookAmbulance() {
 
   return (
     <div className="book-ambulance">
-      <Header />
+      <Header userType={userType} />
       {longitude && latitude && <BookingMap errorMessage={errorMessage} longitude={longitude} latitude={latitude} setLatitude={setLatitude} setLongitude={setLongitude} />}
     </div>
   )

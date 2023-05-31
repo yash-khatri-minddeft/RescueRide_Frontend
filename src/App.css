@@ -384,3 +384,10 @@ button.button-white:hover,
   margin: 0px auto;
   top: 15px;
 }
+
+/* booking list */
+
+.booking-list {
+  position: relative;
+  padding: 100px 0;
+}
