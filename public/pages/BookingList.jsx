@@ -40,6 +40,8 @@ export default function BookingList({ checkLogin, checkCTRLLogin }) {
                       setIsLoading(false)
                     }
                   })
+              } else {
+                setIsLoading(false);
               }
             })
         })
@@ -55,6 +57,7 @@ export default function BookingList({ checkLogin, checkCTRLLogin }) {
       <Header userType={userType} />
       <div className="booking-list">
         <div className="container">
+          <p>if you can't see your bookings, please open the website from the same browser you booked the ambulance.</p>
           <div className="table-responsive">
             {bookings?.length ?
                 <table className='table'>
@@ -71,7 +74,7 @@ export default function BookingList({ checkLogin, checkCTRLLogin }) {
                     })}
                   </tbody>
                 </table> :
-              <>No Bookings found</>
+              <p>No Bookings found!</p>
             }
           </div>
         </div>

@@ -29,17 +29,20 @@ export default function Historybooking({ checkLogin, checkCTRLLogin }) {
       if (localBooking.length) {
         localBooking.map((id) => {
           axios.post('api/controller/get-pending-booking', { id: id, status: 'ended' })
-            .then(response => {
-              if (response.data.data != null) {
-                setBookings((bookings) => [...bookings, response.data.data])
-                console.log(response.data.data.hospitalid)
+          .then(response => {
+            console.log(response.data.data)
+            if (response.data.data != null) {
+              setBookings((bookings) => [...bookings, response.data.data])
+              console.log(response.data.data.hospitalid)
                 axios.post('api/controller/get-hospital-by-id', { id: response.data.data.hospitalid })
-                  .then(response => {
+                .then(response => {
                     if (response.data.success) {
                       setHospitalName((hospitalName) => [...hospitalName, response.data.data.address])
                       setIsLoading(false)
                     }
                   })
+              } else {
+                setIsLoading(false)
               }
             })
         })
@@ -55,6 +58,7 @@ export default function Historybooking({ checkLogin, checkCTRLLogin }) {
       <Header userType={userType} />
       <div className="booking-list">
         <div className="container">
+          <p>if you can't see your bookings, please open the website from the same browser you booked the ambulance.</p>
           <div className="table-responsive">
             {bookings?.length ?
                 <table className='table'>
@@ -71,7 +75,7 @@ export default function Historybooking({ checkLogin, checkCTRLLogin }) {
                     })}
                   </tbody>
                 </table> :
-              <>No Bookings found</>
+              <p>No Bookings found!</p>
             }
           </div>
         </div>

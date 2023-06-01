@@ -30,6 +30,7 @@ export default function CurrentBookings({ checkLogin, checkCTRLLogin }) {
         localBooking.map((id) => {
           axios.post('api/controller/get-pending-booking', { id: id, status: 'current' })
             .then(response => {
+              console.log(response.data.data)
               if (response.data.data != null) {
                 setBookings((bookings) => [...bookings, response.data.data])
                 console.log(response.data.data.hospitalid)
@@ -40,6 +41,8 @@ export default function CurrentBookings({ checkLogin, checkCTRLLogin }) {
                       setIsLoading(false)
                     }
                   })
+              } else {
+                setIsLoading(false)
               }
             })
         })
@@ -55,6 +58,7 @@ export default function CurrentBookings({ checkLogin, checkCTRLLogin }) {
       <Header userType={userType} />
       <div className="booking-list">
         <div className="container">
+          <p>if you can't see your bookings, please open the website from the same browser you booked the ambulance.</p>
           <div className="table-responsive">
             {bookings?.length ?
                 <table className='table'>
@@ -71,7 +75,7 @@ export default function CurrentBookings({ checkLogin, checkCTRLLogin }) {
                     })}
                   </tbody>
                 </table> :
-              <>No Bookings found</>
+              <p>No Bookings found!</p>
             }
           </div>
         </div>
