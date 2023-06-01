@@ -7,7 +7,7 @@ export default function ClientBookingList({ id, hospitalName, status }) {
   return (
     <>
       <tr>
-        <td><Link to={`/booking-list/${id}`}>{id}</Link></td>
+        <td><Link to={`/booking-details/${id}`}>{id}</Link></td>
         <td>{hospitalName}</td>
         <td><span>{status}</span></td>
       </tr>

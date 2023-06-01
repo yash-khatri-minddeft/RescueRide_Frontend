@@ -74,8 +74,9 @@ button:not(.btn-close, .Toastify__close-button),
 }
 
 button:not(.btn-close, .Toastify__close-button):hover,
-.button {
+.button:hover {
   background-color: var(--thm-secondary);
+  color: #fff;
 }
 
 button.button-white,
@@ -353,7 +354,9 @@ button.button-white:hover,
 }
 
 .admin-dashboard table tr td,
-.admin-dashboard table tr th {
+.admin-dashboard table tr th,
+.controller-dashboard table tr td,
+.controller-dashboard table tr th {
   border: 1px solid var(--thm-border);
   padding: 10px 20px;
   vertical-align: middle;

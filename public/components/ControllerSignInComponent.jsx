@@ -13,7 +13,6 @@ export default function ControllerSignInComponent({ setIsProcessing, setToastTex
         email: email.current.value,
         password: password.current.value
       })
-      console.log(response)
       if (response.data.success) {
         setToastText({ text: 'OTP sent!', type: 'success' })
         setIsProcessing(true)

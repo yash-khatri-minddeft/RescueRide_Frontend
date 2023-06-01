@@ -16,6 +16,7 @@ import BookingList from '../public/pages/BookingList';
 import BookingDetailMap from '../public/components/BookingDetailMap';
 import CurrentBookings from '../public/pages/CurrentBookings';
 import Historybooking from '../public/pages/HistoryBookings';
+import ControllerBookingRequest from '../public/pages/ControllerBookingRequest';
 
 function App() {
   const [userType, setUserType] = useState('guest');
@@ -89,7 +90,8 @@ function App() {
           <Route path='/booking-list' element={<BookingList checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/current-booking' element={<CurrentBookings checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/history-booking' element={<Historybooking checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
-          <Route path='/booking-list/:bookingId' element={<BookingDetailMap checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
+          <Route path='/booking-details/:bookingId' element={<BookingDetailMap checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
+          <Route path='/booking-request/:bookingId' element={<ControllerBookingRequest checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
         </Routes>
       </BrowserRouter>
     </>

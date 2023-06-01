@@ -6,7 +6,7 @@ import AdminSignInComponent from '../components/AdminSignInComponent'
 import { useNavigate } from 'react-router-dom';
 import ControllerSignInComponent from '../components/ControllerSignInComponent'
 
-export default function ControllerSignIn({checkCTRLLogin}) {
+export default function ControllerSignIn({ checkCTRLLogin }) {
   const [isProcessing, setIsProcessing] = useState();
   const [maskedEmail, setMaskedEmail] = useState();
   const [isLoading, setIsLoading] = useState();
@@ -18,14 +18,14 @@ export default function ControllerSignIn({checkCTRLLogin}) {
     } else if (toastText.type == 'error') {
       toast.error(toastText.text)
     }
-
+  }, [toastText])
+  useEffect(() => {
     checkCTRLLogin().then((isLoggedIn) => {
-      console.log(isLoggedIn)
       if (isLoggedIn) {
         navigate('/controller-dashboard')
       }
     });
-  }, [toastText])
+  }, [])
   return (
     <div className="login-page">
       <div className="container">

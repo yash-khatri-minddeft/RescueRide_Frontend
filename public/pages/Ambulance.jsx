@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SideBar from '../components/SideBar'
 import Header from '../components/Header'
 import AmbulanceComponent from '../components/AmbulanceComponent'
@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import AddAmbulance from '../components/AddAmbulance'
 import Loader from '../components/Loader';
 
-export default function Ambulance({checkLogin}) {
+export default function Ambulance({ checkLogin }) {
   const token = localStorage.getItem('token')
   const [ambulances, setAmbulances] = useState();
   const [modalShow, setModalShow] = useState(false);
@@ -19,7 +19,7 @@ export default function Ambulance({checkLogin}) {
         navigate('/')
       }
     });
-    const getAmbulances = async() => {
+    const getAmbulances = async () => {
       const response = await axios.get('/api/controller/admin-getambulance', {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -35,11 +35,11 @@ export default function Ambulance({checkLogin}) {
   return (
     <>
       <div className="admin-dashboard">
-      {isLoading && <Loader />}
-        <Header userType="admin"/>
-        <SideBar />
-        <AmbulanceComponent ambulances={ambulances} setModalShow={setModalShow}/>
-        <AddAmbulance show={modalShow} ambulances={ambulances} setAmbulances={setAmbulances} onHide={() => setModalShow(false)}/>
+        {isLoading && <Loader />}
+        <Header userType="admin" />
+        <SideBar userType='admin' />
+        <AmbulanceComponent ambulances={ambulances} setModalShow={setModalShow} />
+        <AddAmbulance show={modalShow} ambulances={ambulances} setAmbulances={setAmbulances} onHide={() => setModalShow(false)} />
       </div>
     </>
   )
