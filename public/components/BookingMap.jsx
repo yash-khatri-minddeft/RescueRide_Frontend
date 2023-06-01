@@ -14,8 +14,7 @@ import BookPopup from './BookPopup';
 const RecenterAutomatically = ({ lat, lng }) => {
   const map = useMap();
   useEffect(() => {
-    console.log()
-    map.setView([lat, lng], map.getZoom(), {
+    map.setView([lat, lng], 11, {
       animate: true
     });
   }, [lat, lng]);
@@ -29,7 +28,7 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
   const [userEmail, setUserEmail] = useState();
   const [hospitalID, setHospitalID] = useState();
   const [modalShow, setModalShow] = useState(false);
-  const [toastMsg, setToastMsg] = useState({type:'', message:''});
+  const [toastMsg, setToastMsg] = useState({ type: '', message: '' });
   useEffect(() => {
     axios.post('/api/controller/user-gethospital', { latitude: latitude, longitude: longitude })
       .then(response => {
@@ -44,12 +43,14 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
   }, [errorMessage])
 
   useEffect(() => {
-    if(toastMsg.type == 'success') {
-      toast.success(toastMsg.message)
-    } else if(toastMsg.type == 'error') {
+    if (toastMsg.type == 'success') {
+      toast.success(toastMsg.message, {
+        autoClose:2000
+      })
+    } else if (toastMsg.type == 'error') {
       toast.error(toastMsg.message)
     }
-  },[toastMsg])
+  }, [toastMsg])
 
   const ambulanceIcon = new Icon({
     iconUrl: icon,

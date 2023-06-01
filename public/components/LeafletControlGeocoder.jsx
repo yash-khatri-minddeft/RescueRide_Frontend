@@ -5,7 +5,7 @@ import "leaflet-control-geocoder/dist/Control.Geocoder.js";
 import L from "leaflet";
 import icon from "./mapConstants";
 
-export default function LeafletControlGeocoder({ setLatitude, setLongitude, setIsInputAdded, isInputAdded }) {
+export default function LeafletControlGeocoder({ setLatitude, setLongitude }) {
   const map = useMap();
 
   useEffect(() => {

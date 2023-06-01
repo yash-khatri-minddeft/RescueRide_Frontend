@@ -23,10 +23,12 @@ export default function BookPopup({ longitude, latitude, modalShow, setModalShow
 			console.log(response)
 			if (response.data.success) {
 				setModalShow(false)
-				setToastMsg({ type: 'success', message: 'Ambulance Booking is Pending.Please wait for confirmation' })
+				setToastMsg({ type: 'success', message: 'Ambulance Booking is Pending.Please wait for confirmation, Redirecting to booking list page' })
 				localBooking.push(response.data.data._id)
 				localStorage.setItem('bookingID', JSON.stringify(localBooking))
-				navigate('/booking-list')
+				setTimeout(() => {
+					navigate('/booking-list')
+				}, 2000)
 			}
 		})
 			.catch((err) => {
