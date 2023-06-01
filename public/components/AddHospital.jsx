@@ -60,6 +60,14 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide }) {
 						</div>
 						<div className="col-lg-6">
 							<div className="input-box">
+								<label htmlFor="latitude">
+									Latitude: <span>*</span>
+								</label>
+								<input type="number" step='0.00000000001' min="-90" max="90" id="latitude" required ref={latitude} />
+							</div>
+						</div>
+						<div className="col-lg-6">
+							<div className="input-box">
 								<label htmlFor="longitude">
 									Longitude: <span>*</span>
 								</label>
@@ -67,17 +75,11 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide }) {
 									type="number"
 									id="longitude"
 									required
+									min="-180"
+									max="180"
 									step='0.00000000001'
 									ref={longitude}
 								/>
-							</div>
-						</div>
-						<div className="col-lg-6">
-							<div className="input-box">
-								<label htmlFor="latitude">
-									Latitude: <span>*</span>
-								</label>
-								<input type="number" step='0.00000000001' id="latitude" required ref={latitude} />
 							</div>
 						</div>
 						<div className="col-lg-12">

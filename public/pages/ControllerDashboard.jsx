@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import SideBar from '../components/SideBar';
 import axios from 'axios';
 import ControllerBookingList from '../components/ControllerBookingList';
+import Loader from '../components/Loader';
 
 export default function ControllerDashboard({ checkCTRLLogin }) {
   const navigate = useNavigate();
   const [bookings, setBookings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     checkCTRLLogin().then((isLoggedIn) => {
       if (!isLoggedIn) {
@@ -16,14 +18,12 @@ export default function ControllerDashboard({ checkCTRLLogin }) {
     });
   }, [])
   useEffect(() => {
-
     axios.get('/api/controller/get-all-pending-bookings')
       .then(async (response) => {
-        // setBookings(response.data.data)
         return Promise.all(response.data.data.map(async (booking) => {
-          console.log(booking)
           return axios.post('/api/controller/get-hospital-by-id', { id: booking.hospitalid })
             .then((hospital) => {
+              setIsLoading(false)
               return setBookings((bookings) => [...bookings, { booking: booking, hospital: hospital.data.data }])
             })
         }));
@@ -31,6 +31,7 @@ export default function ControllerDashboard({ checkCTRLLogin }) {
   }, [])
   return (
     <div className="controller-dashboard">
+      {isLoading && <Loader />}
       <Header userType="controller" />
       <SideBar userType="controller" />
       <ControllerBookingList bookings={bookings} />

@@ -24,7 +24,7 @@ export default function SideBar({ userType }) {
     } else if (userType == 'controller') {
       setSidebarNav(controllerSidebar)
     }
-  }, [])
+  }, [userType])
   return (
     <div className="sidebar">
       <ul className='list-unstyled'>

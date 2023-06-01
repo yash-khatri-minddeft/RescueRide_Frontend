@@ -23,7 +23,6 @@ export default function ControllerBookingList({ bookings }) {
             </thead>
             <tbody>
               {bookings?.map((booking, key) => {
-                console.log(booking)
                 return (
                   <tr key={key}>
                     <td>{booking.booking.username}</td>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import ModalHeader from "react-bootstrap/esm/ModalHeader";
 import { toast } from "react-toastify";
@@ -10,7 +10,7 @@ export default function AddAmbulance({
   setAmbulances,
   onHide,
 }) {
-  const AmbulanceNumber = useRef();
+  const [ambulanceValue, setAmbulanceValue] = useState('');
   const type = useRef();
   const driverName = useRef();
   const driveNo = useRef();
@@ -22,7 +22,7 @@ export default function AddAmbulance({
     const responce = await axios.post(
       "/api/controller/admin-addambulance",
       {
-        AmbulanceNumber: AmbulanceNumber.current.value,
+        AmbulanceNumber: ambulanceValue,
         type: type.current.value,
         driverName: driverName.current.value,
         driveNo: driveNo.current.value,
@@ -42,6 +42,7 @@ export default function AddAmbulance({
         ...ambulances,
         {
           AmbulanceNumber: responce.data.data.AmbulanceNumber,
+          Status: responce.data.data.Status,
           type: responce.data.data.type,
           driverName: responce.data.data.driverName,
           driveNo: responce.data.data.driveNo,
@@ -70,7 +71,8 @@ export default function AddAmbulance({
                   id="AmbulanceNumber"
                   autoFocus
                   required
-                  ref={AmbulanceNumber}
+                  value={ambulanceValue}
+                  onInput={(e) => {setAmbulanceValue((e.target.value).toUpperCase())}}
                 />
               </div>
             </div>
