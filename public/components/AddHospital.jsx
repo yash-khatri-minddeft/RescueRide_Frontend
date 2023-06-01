@@ -67,7 +67,7 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide }) {
 									type="number"
 									id="longitude"
 									required
-									step='0.0000000001'
+									step='0.00000000001'
 									ref={longitude}
 								/>
 							</div>
@@ -77,7 +77,7 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide }) {
 								<label htmlFor="latitude">
 									Latitude: <span>*</span>
 								</label>
-								<input type="number" step='0.0000000001' id="latitude" required ref={latitude} />
+								<input type="number" step='0.00000000001' id="latitude" required ref={latitude} />
 							</div>
 						</div>
 						<div className="col-lg-12">
