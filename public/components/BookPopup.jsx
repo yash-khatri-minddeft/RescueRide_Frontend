@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import ModalHeader from "react-bootstrap/esm/ModalHeader";
 import { useNavigate } from 'react-router-dom';
 
-export default function BookPopup({ longitude, latitude, modalShow, setModalShow, hospitalID, toastMsg, setToastMsg }) {
+export default function BookPopup({ longitude, latitude, modalShow, setModalShow, hospitalID, setToastMsg }) {
 	const username = useRef();
 	const number = useRef();
 	const type = useRef();
