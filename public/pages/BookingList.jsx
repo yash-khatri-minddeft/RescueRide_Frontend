@@ -32,7 +32,6 @@ export default function BookingList({ checkLogin, checkCTRLLogin }) {
             .then(response => {
               if (response.data.data != null) {
                 setBookings((bookings) => [...bookings, response.data.data])
-                console.log(response.data.data.hospitalid)
                 axios.post('api/controller/get-hospital-by-id', { id: response.data.data.hospitalid })
                   .then(response => {
                     if (response.data.success) {
