@@ -33,7 +33,7 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide }) {
 			setHospitals([
 				...hospitals,
 				{
-					name: responce.data.data.name,
+					name: responce.data.data.address,
 					longitude: responce.data.data.longitude,
 					latitude: responce.data.data.latitude,
 				},
