@@ -12,7 +12,7 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide }) {
 	const handleSubmit = async (e) => {
 		const token = localStorage.getItem("token");
 		e.preventDefault();
-		const responce = await axios.post(
+		const response = await axios.post(
 			"/api/controller/admin-addhospital",
 			{
 				address: address.current.value,
@@ -25,21 +25,21 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide }) {
 				},
 			}
 		);
-		console.log(responce);
-		if (responce.data.success) {
-			toast.success(responce.data.message);
-			console.log(responce.data);
+		console.log(response);
+		if (response.data.success) {
+			toast.success(response.data.message);
+			console.log(response.data);
 			onHide();
 			setHospitals([
 				...hospitals,
 				{
-					name: responce.data.data.address,
-					longitude: responce.data.data.longitude,
-					latitude: responce.data.data.latitude,
+					address: response.data.data.address,
+					longitude: response.data.data.longitude,
+					latitude: response.data.data.latitude,
 				},
 			]);
 		} else {
-			toast.error(responce.data.message);
+			toast.error(response.data.message);
 		}
 	};
 	return (
