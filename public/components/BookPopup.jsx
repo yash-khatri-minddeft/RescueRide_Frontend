@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import ModalHeader from "react-bootstrap/esm/ModalHeader";
 import { useNavigate } from 'react-router-dom';
 
-export default function BookPopup({ longitude, latitude, modalShow, setModalShow, hospitalID, setToastMsg }) {
+export default function BookPopup({ socket, longitude, latitude, modalShow, setModalShow, hospitalID, setToastMsg }) {
 	const username = useRef();
 	const number = useRef();
 	const type = useRef();
@@ -23,6 +23,7 @@ export default function BookPopup({ longitude, latitude, modalShow, setModalShow
 			console.log(response)
 			if (response.data.success) {
 				setModalShow(false)
+				socket.emit('greetings', { ...response.data.data })
 				setToastMsg({ type: 'success', message: 'Ambulance Booking is Pending.Please wait for confirmation, Redirecting to booking list page' })
 				localBooking.push(response.data.data._id)
 				localStorage.setItem('bookingID', JSON.stringify(localBooking))
@@ -36,6 +37,12 @@ export default function BookPopup({ longitude, latitude, modalShow, setModalShow
 				console.log(err)
 			})
 	}
+
+	useEffect(() => {
+		socket.connect();
+		return () => {
+		}
+	}, [socket])
 	return (
 		<Modal show={modalShow} onHide={() => setModalShow(false)} className="admin-modal" centered>
 			<ModalHeader closeButton>

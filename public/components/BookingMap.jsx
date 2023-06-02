@@ -9,7 +9,12 @@ import { Icon } from 'leaflet';
 import axios from 'axios';
 import LeafletControlGeocoder from './LeafletControlGeocoder';
 import { ToastContainer, toast } from 'react-toastify';
+import { io } from 'socket.io-client';
 import BookPopup from './BookPopup';
+
+const socket = io('http://localhost:8080', {
+  autoConnect: false
+})
 
 const RecenterAutomatically = ({ lat, lng }) => {
   const map = useMap();
@@ -33,7 +38,6 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
     axios.post('/api/controller/user-gethospital', { latitude: latitude, longitude: longitude })
       .then(response => {
         setHospitals(response.data.data)
-        console.log(response.data.data)
       })
   }, [latitude, longitude])
 
@@ -108,7 +112,7 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
           })}
         </MarkerClusterGroup>
       </MapContainer>
-      <BookPopup longitude={longitude} latitude={latitude} modalShow={modalShow} setModalShow={setModalShow} hospitalID={hospitalID} setToastMsg={setToastMsg} />
+      <BookPopup socket={socket} longitude={longitude} latitude={latitude} modalShow={modalShow} setModalShow={setModalShow} hospitalID={hospitalID} setToastMsg={setToastMsg} />
     </div>
   )
 }
