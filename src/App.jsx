@@ -17,6 +17,7 @@ import BookingDetailMap from '../public/components/BookingDetailMap';
 import CurrentBookings from '../public/pages/CurrentBookings';
 import Historybooking from '../public/pages/HistoryBookings';
 import ControllerBookingRequest from '../public/pages/ControllerBookingRequest';
+import DriverSignIn from '../public/pages/DriverSignIn';
 
 function App() {
   const [userType, setUserType] = useState('guest');
@@ -73,6 +74,32 @@ function App() {
     }
   }
 
+  const checkDRIVERLogin = async() => {
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      const isDriver = await axios.get('/api/driver/check-login',{
+        headers:{
+          'Authorization': `Bearer ${token}`
+        }
+      }).then(response => {
+        if (!response.data.isDriver) {
+          return false;
+        }
+        setUserType('driver')
+        return response.data.isDriver;
+      }).catch(err => {
+        if (err.message && err.response.status === 404) {
+          console.log(err.response.data.message)
+        }
+        return false;
+      })
+      return isDriver;
+    }
+    else{
+      return false;
+    }
+  }
+
   return (
     <>
       <BrowserRouter>
@@ -84,6 +111,7 @@ function App() {
           <Route path='/add-hospital' element={<Hospital checkLogin={checkLogin} />} />
           <Route path='/add-ambulance' element={<Ambulance checkLogin={checkLogin} />} />
           <Route path="/controller-signin" element={<ControllerSignIn checkCTRLLogin={checkCTRLLogin} />} />
+          <Route path="/driver-signin" element={<DriverSignIn checkDRIVERLogin={checkDRIVERLogin} />} />
           <Route path='/change-ctrl-pasword' element={<UpdateCTRLPass />} />
           <Route path='/controller-dashboard' element={<ControllerDashboard checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/book-ambulance' element={<BookAmbulance checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />

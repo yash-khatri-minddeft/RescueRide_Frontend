@@ -20,7 +20,7 @@ export default function UpdateCTRLPass() {
     if (response.data.success) {
       toast.success(response.data.message)
       localStorage.setItem('token',response.data.token)
-      navigate('/controller-dashboard')
+      navigate(`/${response.data.userType}-dashboard`)
     } else {
       toast.error(response.data.message)
     }
