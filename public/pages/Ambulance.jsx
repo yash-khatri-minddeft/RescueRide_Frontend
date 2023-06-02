@@ -16,7 +16,7 @@ export default function Ambulance({ checkLogin }) {
   useEffect(() => {
     checkLogin().then((isLoggedIn) => {
       if (!isLoggedIn) {
-        navigate('/')
+        navigate('/admin-signin')
       }
     });
     const getAmbulances = async () => {

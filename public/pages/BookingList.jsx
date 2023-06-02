@@ -4,7 +4,7 @@ import ClientBookingList from '../components/ClientBookingList';
 import Loader from '../components/Loader';
 import axios from 'axios';
 
-export default function BookingList({ checkLogin, checkCTRLLogin }) {
+export default function BookingList({ checkLogin, checkCTRLLogin, checkDRIVERLogin }) {
   const [userType, setUserType] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -18,6 +18,11 @@ export default function BookingList({ checkLogin, checkCTRLLogin }) {
         setUserType('controller')
       }
     });
+    checkDRIVERLogin().then((isLoggedIn) => {
+      if (isLoggedIn) {
+        setUserType('driver')
+      }
+    })
   }, [])
 
   const localBooking = JSON.parse(localStorage.getItem('bookingID')) || [];

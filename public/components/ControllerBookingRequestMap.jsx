@@ -17,7 +17,7 @@ const RecenterAutomatically = ({ lat, lng }) => {
 }
 
 export default function ControllerBookingRequestMap({ position, booking }) {
-  const [ambulances, setAmbulances] = useState();
+  const [ambulances, setAmbulances] = useState([]);
   const [ambulanceNo, setAmbulanceNo] = useState();
   const mapMarker = new Icon({
     iconUrl: mapIcon,
@@ -29,7 +29,6 @@ export default function ControllerBookingRequestMap({ position, booking }) {
   })
 
   useEffect(() => {
-    console.log('booking',booking)
     const token = localStorage.getItem("token");
     axios.post('/api/controller/controller-getambulance', {
       latitude: position.latitude,
@@ -40,18 +39,26 @@ export default function ControllerBookingRequestMap({ position, booking }) {
         Authorization: `Bearer ${token}`,
       }
     }).then(response => {
-      console.log(response);
-      setAmbulances(response.data.data)
+      response?.data?.data?.map((el) => {
+        console.log(el)
+        setAmbulances(ambulances => (
+          { ...ambulances, [el._id]: el }
+        ))
+        setAmbulances(ambulances => (
+          { ...ambulances, ['asd']: el }
+        ))
+      })
     })
   }, [position])
 
   const bookHandler = async (id) => {
-    
+
   }
   return (
     <>
+      {console.log("suiii", ambulances)}
       {position && booking &&
-        <div className="booking-map" style={{marginLeft:'400px'}}>
+        <div className="booking-map" style={{ marginLeft: '400px' }}>
           <MapContainer eventHandlers={{
             click: (e) => {
               console.log(e)
@@ -73,7 +80,7 @@ export default function ControllerBookingRequestMap({ position, booking }) {
               </Popup>
             </Marker>
             <MarkerClusterGroup>
-              {ambulances?.map((ambulance, key) => {
+              {/* {ambulances?.map((ambulance, key) => {
                 return (
                   <Marker key={key} position={[ambulance.latitude, ambulance.longitude]} icon={ambulanceIcon}>
                     <Popup>
@@ -84,11 +91,24 @@ export default function ControllerBookingRequestMap({ position, booking }) {
                     </Popup>
                   </Marker>
                 )
+              })} */}
+              {Object.keys(ambulances).map((key, index) => {
+                console.log(ambulances[key])
+                return (
+                  <div key={index}>
+                    <h2>
+                      {key}: 
+                    </h2>
+
+                    <hr />
+                  </div>
+                );
               })}
             </MarkerClusterGroup>
             <RecenterAutomatically lat={position.latitude} lng={position.longitude} />
           </MapContainer>
-        </div>}
+        </div>
+      }
     </>
   )
 }

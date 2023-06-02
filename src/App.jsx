@@ -106,7 +106,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<HomePage checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
+          <Route path='/' element={<HomePage checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin}/>} />
           <Route path='/admin-signin' element={<AdminSignIn checkLogin={checkLogin} />} />
           <Route path='/admin-dashboard' element={<AdminDashBoard checkLogin={checkLogin} />} />
           <Route path='/add-controller' element={<Controller checkLogin={checkLogin} />} />
@@ -115,12 +115,12 @@ function App() {
           <Route path="/controller-signin" element={<ControllerSignIn checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/change-ctrl-pasword' element={<UpdateCTRLPass />} />
           <Route path='/controller-dashboard' element={<ControllerDashboard checkCTRLLogin={checkCTRLLogin} />} />
-          <Route path='/book-ambulance' element={<BookAmbulance checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
-          <Route path='/booking-list' element={<BookingList checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
-          <Route path='/current-booking' element={<CurrentBookings checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
-          <Route path='/history-booking' element={<Historybooking checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
-          <Route path='/booking-details/:bookingId' element={<BookingDetailMap checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
-          <Route path='/booking-request/:bookingId' element={<ControllerBookingRequest checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
+          <Route path='/book-ambulance' element={<BookAmbulance checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin} />} />
+          <Route path='/booking-list' element={<BookingList checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} checkDRIVERLogin={checkDRIVERLogin} />
+          <Route path='/current-booking' element={<CurrentBookings checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin} />} />
+          <Route path='/history-booking' element={<Historybooking checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin} />} />
+          <Route path='/booking-details/:bookingId' element={<BookingDetailMap checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin} />} />
+          <Route path='/booking-request/:bookingId' element={<ControllerBookingRequest checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin} />} />
           <Route path="/driver-signin" element={<DriverSignIn checkDRIVERLogin={checkDRIVERLogin} />} />
           <Route path='/driver-dashboard' element={<DriverDashboard checkDRIVERLogin={checkDRIVERLogin} />} />
           <Route path='/ambulance-location' element={<AmbulanceLocation checkDRIVERLogin={checkDRIVERLogin} />} />

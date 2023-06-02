@@ -9,7 +9,7 @@ export default function AdminDashBoard({ checkLogin }) {
   useEffect(() => {
     checkLogin().then((isLoggedIn) => {
       if (!isLoggedIn) {
-        navigate('/')
+        navigate('/admin-signin')
       }
     });
   }, [])

@@ -13,13 +13,13 @@ const socket = io('http://localhost:8080', {
 
 export default function AmbulanceLocation({ checkDRIVERLogin }) {
   const navigate = useNavigate();
-  const [ambulanceId, setAmbulanceId] = useState([]);
+  const [ambulanceId, setAmbulanceId] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const token = localStorage.getItem('token')
   useEffect(() => {
     checkDRIVERLogin().then((isLoggedIn) => {
       if (!isLoggedIn) {
-        navigate('/')
+        navigate('/driver-signin')
       }
     })
     axios.get(`/api/driver/getUserData`, {

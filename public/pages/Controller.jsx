@@ -16,7 +16,7 @@ export default function Controller({ checkLogin }) {
   useEffect(() => {
     checkLogin().then((isLoggedIn) => {
       if (!isLoggedIn) {
-        navigate("/");
+        navigate("/admin-signin");
       }
     });
     const getControllers = async () => {

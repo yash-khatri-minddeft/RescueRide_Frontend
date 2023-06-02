@@ -16,7 +16,7 @@ export default function Hospital({checkLogin}) {
   useEffect(() => {
     checkLogin().then((isLoggedIn) => {
       if (!isLoggedIn) {
-        navigate('/')
+        navigate('/admin-signin')
       }
     });
     const getHospitals = async() => {
