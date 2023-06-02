@@ -12,6 +12,10 @@ export default function SideBar({ userType }) {
     { text: 'Dashboard', link: '/controller-dashboard', icon: 'fa-solid fa-gauge' },
     { text: 'Manage Ambulance', link: '/', icon: 'fa-solid fa-truck-medical' },
   ];
+  const driverSidebar = [
+    { text: 'Dashboard', link: '/driver-dashboard', icon: 'fa-solid fa-gauge' },
+    { text: 'Location', link: '/ambulance-location', icon: 'fa-solid fa-location-dot' },
+  ];
   const navigate = useNavigate();
   const logOut = () => {
     localStorage.removeItem('token')
@@ -23,6 +27,8 @@ export default function SideBar({ userType }) {
       setSidebarNav(adminSidebar);
     } else if (userType == 'controller') {
       setSidebarNav(controllerSidebar)
+    } else if (userType == 'driver') {
+      setSidebarNav(driverSidebar)
     }
   }, [userType])
   return (

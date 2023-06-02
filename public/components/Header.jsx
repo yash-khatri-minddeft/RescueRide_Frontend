@@ -22,7 +22,11 @@ export default function Header({ userType = 'guest' }) {
         }
       })
       if (response.data.success) {
-        setUsername(`Hello, ${response.data.data.name}`)
+        if(response.data.data.driverName) {
+          setUsername(`Hello, ${response.data.data.driverName}`)
+        } else {
+          setUsername(`Hello, ${response.data.data.name}`)
+        }
       }
     }
     if (token && userType !== 'guest') {

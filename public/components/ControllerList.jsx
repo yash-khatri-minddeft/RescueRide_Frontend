@@ -3,8 +3,13 @@ import Axios from "axios";
 
 export default function ControllerList({ controller }) {
   const deleteController = () => {
+    const token = localStorage.getItem('token');
     if (confirm("Do you really want to delete Controller") == true) {
-      Axios.delete(`/api/controller/deleteController/${controller._id}`)
+      Axios.delete(`/api/controller/deleteController/${controller._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
         .then((response) => {
           console.log(response);
         })

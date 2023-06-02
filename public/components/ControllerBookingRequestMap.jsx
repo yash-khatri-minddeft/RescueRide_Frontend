@@ -18,6 +18,7 @@ const RecenterAutomatically = ({ lat, lng }) => {
 
 export default function ControllerBookingRequestMap({ position, booking }) {
   const [ambulances, setAmbulances] = useState();
+  const [ambulanceNo, setAmbulanceNo] = useState();
   const mapMarker = new Icon({
     iconUrl: mapIcon,
     iconSize: [30, 50]
@@ -28,10 +29,12 @@ export default function ControllerBookingRequestMap({ position, booking }) {
   })
 
   useEffect(() => {
+    console.log('booking',booking)
     const token = localStorage.getItem("token");
     axios.post('/api/controller/controller-getambulance', {
       latitude: position.latitude,
-      longitude: position.longitude
+      longitude: position.longitude,
+      type: booking?.type_of_ambulance
     }, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -41,6 +44,10 @@ export default function ControllerBookingRequestMap({ position, booking }) {
       setAmbulances(response.data.data)
     })
   }, [position])
+
+  const bookHandler = async (id) => {
+    
+  }
   return (
     <>
       {position && booking &&
@@ -72,7 +79,7 @@ export default function ControllerBookingRequestMap({ position, booking }) {
                     <Popup>
                       <div className="hostpital-popup">
                         <h4>{ambulance.AmbulanceNumber}</h4>
-                        <button>Book</button>
+                        <button onClick={() => bookHandler(ambulance._id)}>Book</button>
                       </div>
                     </Popup>
                   </Marker>

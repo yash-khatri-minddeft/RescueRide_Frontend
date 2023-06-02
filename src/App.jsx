@@ -18,6 +18,8 @@ import CurrentBookings from '../public/pages/CurrentBookings';
 import Historybooking from '../public/pages/HistoryBookings';
 import ControllerBookingRequest from '../public/pages/ControllerBookingRequest';
 import DriverSignIn from '../public/pages/DriverSignIn';
+import DriverDashboard from '../public/pages/DriverDashboard';
+import AmbulanceLocation from '../public/pages/AmbulanceLocation';
 
 function App() {
   const [userType, setUserType] = useState('guest');
@@ -111,7 +113,6 @@ function App() {
           <Route path='/add-hospital' element={<Hospital checkLogin={checkLogin} />} />
           <Route path='/add-ambulance' element={<Ambulance checkLogin={checkLogin} />} />
           <Route path="/controller-signin" element={<ControllerSignIn checkCTRLLogin={checkCTRLLogin} />} />
-          <Route path="/driver-signin" element={<DriverSignIn checkDRIVERLogin={checkDRIVERLogin} />} />
           <Route path='/change-ctrl-pasword' element={<UpdateCTRLPass />} />
           <Route path='/controller-dashboard' element={<ControllerDashboard checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/book-ambulance' element={<BookAmbulance checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
@@ -120,6 +121,9 @@ function App() {
           <Route path='/history-booking' element={<Historybooking checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/booking-details/:bookingId' element={<BookingDetailMap checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/booking-request/:bookingId' element={<ControllerBookingRequest checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} />
+          <Route path="/driver-signin" element={<DriverSignIn checkDRIVERLogin={checkDRIVERLogin} />} />
+          <Route path='/driver-dashboard' element={<DriverDashboard checkDRIVERLogin={checkDRIVERLogin} />} />
+          <Route path='/ambulance-location' element={<AmbulanceLocation checkDRIVERLogin={checkDRIVERLogin} />} />
         </Routes>
       </BrowserRouter>
     </>
