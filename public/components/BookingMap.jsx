@@ -33,6 +33,7 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
     axios.post('/api/controller/user-gethospital', { latitude: latitude, longitude: longitude })
       .then(response => {
         setHospitals(response.data.data)
+        console.log(response.data.data)
       })
   }, [latitude, longitude])
 
