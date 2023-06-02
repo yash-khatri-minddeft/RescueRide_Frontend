@@ -67,7 +67,8 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
   })
   const position = [latitude, longitude];
 
-  const bookHospital = () => {
+  const bookHospital = (id) => {
+    setHospitalID(id)
     setModalShow(true)
   }
 
@@ -95,16 +96,11 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
         <MarkerClusterGroup>
           {hospitals?.map((hospital, key) => {
             return (
-              <Marker
-                eventHandlers={{
-                  click: (e) => {
-                    setHospitalID(hospital._id)
-                  },
-                }} key={key} position={[hospital.latitude, hospital.longitude]} icon={ambulanceIcon}>
+              <Marker key={key} position={[hospital.latitude, hospital.longitude]} icon={ambulanceIcon}>
                 <Popup>
                   <div className="hostpital-popup">
                     <h4>{hospital.address}</h4>
-                    <button onClick={bookHospital}>Book</button>
+                    <button onClick={() => bookHospital(hospital._id)}>Book</button>
                   </div>
                 </Popup>
               </Marker>

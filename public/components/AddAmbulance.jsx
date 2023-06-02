@@ -19,7 +19,7 @@ export default function AddAmbulance({
   const handleSubmit = async (e) => {
     const token = localStorage.getItem("token");
     e.preventDefault();
-    const responce = await axios.post(
+    const response = await axios.post(
       "/api/controller/admin-addambulance",
       {
         AmbulanceNumber: ambulanceValue,
@@ -34,23 +34,24 @@ export default function AddAmbulance({
         },
       }
     );
-    console.log(responce);
-    if (responce.data.success) {
-      toast.success(responce.data.message);
+    console.log(response);
+    if (response.data.success) {
+      toast.success(response.data.message);
       onHide();
+      setAmbulanceValue('')
       setAmbulances([
         ...ambulances,
         {
-          AmbulanceNumber: responce.data.data.AmbulanceNumber,
-          Status: responce.data.data.Status,
-          type: responce.data.data.type,
-          driverName: responce.data.data.driverName,
-          driveNo: responce.data.data.driveNo,
-          driverEmail: responce.data.data.driverEmail,
+          AmbulanceNumber: response.data.data.AmbulanceNumber,
+          Status: response.data.data.Status,
+          type: response.data.data.type,
+          driverName: response.data.data.driverName,
+          driveNo: response.data.data.driveNo,
+          driverEmail: response.data.data.driverEmail,
         },
       ]);
     } else {
-      toast.error(responce.data.message);
+      toast.error(response.data.message);
     }
   };
   return (
