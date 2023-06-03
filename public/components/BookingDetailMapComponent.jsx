@@ -8,6 +8,7 @@ import BookingDetailCurrentLocation from './BookingDetailCurrentLocation';
 export default function BookingDetailMapComponent({ bookingId }) {
   const [bookingDetails, setBookingDetails] = useState();
   const [hospitalDetails, setHospitalDetails] = useState();
+  const [ambulanceDetails, setAmbulanceDetails] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     if (bookingId) {
@@ -21,7 +22,14 @@ export default function BookingDetailMapComponent({ bookingId }) {
             .then(hospital => {
               setHospitalDetails(hospital.data.data)
             })
-            
+          if (respose.data.data.ambulance_number != 'null') {
+            axios.post('/api/controller/get-ambulance-by-id', {
+              id: respose.data.data.ambulance_number
+            }).then(ambulance => {
+              setAmbulanceDetails(ambulance.data.data)
+            })
+          }
+
           setBookingDetails(respose.data.data)
         }
         setIsLoading(false)
@@ -36,7 +44,6 @@ export default function BookingDetailMapComponent({ bookingId }) {
           <div className="row justify-content-center">
             <div className="col-lg-6">
               <div className="booking-details-card">
-                {console.log(hospitalDetails)}
                 {bookingDetails && hospitalDetails ?
                   <>
                     <div className="booking-card-top">
@@ -46,25 +53,29 @@ export default function BookingDetailMapComponent({ bookingId }) {
                     <div className="booking-card-bottom">
                       <div className="booking-card-bottom-left">
                         <h3 className='mb-3'>Your Location: </h3>
-                        <div className='mb-2 d-block'>Latitude: {bookingDetails.user_latitude.toFixed(6)}</div>
-                        <div className='d-block'>Longitude: {bookingDetails.user_longitude.toFixed(6)}</div>
+                        <div className='mb-2'>Latitude: {bookingDetails.user_latitude.toFixed(6)}</div>
+                        <div>Longitude: {bookingDetails.user_longitude.toFixed(6)}</div>
                       </div>
                       <div className="booking-card-bottom-right">
                         <h3 className='mb-3'>Hospital Location: </h3>
-                        <div className='mb-2 d-block'>Latitude: {hospitalDetails.latitude.toFixed(6)}</div>
-                        <div className='d-block'>Longitude: {hospitalDetails.longitude.toFixed(6)}</div>
+                        <div className='mb-2'>Latitude: {hospitalDetails.latitude.toFixed(6)}</div>
+                        <div>Longitude: {hospitalDetails.longitude.toFixed(6)}</div>
                       </div>
                     </div>
+                    {bookingDetails.status != 'pending' && ambulanceDetails &&
+                      <div className="booking-card-ambulance-details">
+                        <h3 className='mb-3'>Ambulance Details:</h3>
+                        <div className='mb-2'>Ambulance No: {ambulanceDetails.AmbulanceNumber}</div>
+                        <div className='mb-2'>Ambulance Type: {ambulanceDetails.type}</div>
+                        <div className='mb-2'>Driver Name: {ambulanceDetails.driverName}</div>
+                        <div>Driver Phone No: <a href={`tel:${ambulanceDetails.driveNo}`}>{ambulanceDetails.driveNo}</a></div>
+                      </div>
+                    }
                     {bookingDetails.status != 'current' &&
                       <div className="booking-card-status text-center">
                         <h3 className='mb-3'>Booking Status: </h3>
                         <img src={bookingDetails.status == 'completed' ? successIcon : pendingIcon} className='img-fluid icon' alt="" />
                         <p className='m-0 mt-3' style={{ textTransform: 'capitalize' }}>{bookingDetails.status}</p>
-                      </div>
-                    }
-                    {bookingDetails.status != 'pending' &&
-                      <div className="booking-card-ambulance-details">
-                        <h5></h5>
                       </div>
                     }
                   </> :
@@ -78,13 +89,16 @@ export default function BookingDetailMapComponent({ bookingId }) {
           </div>
         </div>
 
-        {bookingDetails && hospitalDetails && bookingDetails?.status == 'current' &&
+        {bookingDetails && hospitalDetails && bookingDetails?.status != 'pending' &&
           <div className='booking-current-map' style={{ marginTop: '60px', height: '300px' }}>
-            {console.log("suuiii", hospitalDetails)}
             <BookingDetailCurrentLocation
+              bookingDetails={bookingDetails}
+              hospitalDetails={hospitalDetails}
               userCoords={{ latitude: bookingDetails?.user_latitude, longitude: bookingDetails?.user_longitude }}
               ambulanceCoords={{ latitude: bookingDetails?.ambulance_latitude, longitude: bookingDetails?.ambulance_longitude }}
-              hospitalCoords={{ latitude: hospitalDetails?.latitude, longitude: hospitalDetails?.longitude }} />
+              hospitalCoords={{ latitude: hospitalDetails?.latitude, longitude: hospitalDetails?.longitude }}
+              bookingStatus={bookingDetails.status}
+            />
           </div>
         }
       </div>

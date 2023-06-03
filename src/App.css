@@ -466,11 +466,14 @@ button.button-white:hover,
 
 .booking-card-top {
   padding: 40px 20px;
+  position: relative;
+  z-index: 1;
   text-align: center;
   background-color: var(--thm-primary);
 }
 
 .booking-card-bottom {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -478,9 +481,9 @@ button.button-white:hover,
 
 .booking-card-bottom-left,
 .booking-card-bottom-right {
-  flex-grow: 1;
   font-size: 18px;
   padding: 40px 20px;
+  flex: 1 1 0;
 }
 .booking-card-bottom-right {
   border: 1px solid var(--thm-border);
@@ -493,6 +496,19 @@ button.button-white:hover,
 .booking-card-status .icon {
   max-width: 80px;
 }
+.booking-card-ambulance-details {
+  padding: 40px 20px 30px;
+  font-size: 18px;
+}
+.booking-card-ambulance-details ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.booking-card-ambulance-details ul li h5 {
+  margin-bottom: 0;
+  color: var(--thm-primary);
+}
 
 .leaflet-routing-alt {
   max-height: 120px;
@@ -500,4 +516,7 @@ button.button-white:hover,
 
 .leaflet-routing-container:has(.leaflet-routing-alternatives-container:empty) {
   display: none;
+}
+.booking-card-ambulance-details {
+  border-top: 1px solid var(--thm-border);
 }

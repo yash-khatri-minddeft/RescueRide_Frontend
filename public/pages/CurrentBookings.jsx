@@ -59,7 +59,7 @@ export default function CurrentBookings({ checkLogin, checkCTRLLogin, checkDRIVE
       <Header userType={userType} />
       <div className="booking-list">
         <div className="container">
-          <p>if you can't see your bookings, please open the website from the same browser you booked the ambulance.</p>
+        <p>if you can't see your bookings, please check your mail for the booking details link or, open the website from the same browser you booked the ambulance.</p>
           <div className="table-responsive">
             {bookings?.length ?
               <table className='table'>

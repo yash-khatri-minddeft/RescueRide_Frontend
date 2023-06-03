@@ -6,6 +6,11 @@ import icon from './../../src/assets/images/ambulance-icon.png'
 import mapIcon from './../../src/assets/images/map-marker.png';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:8080', {
+  autoConnect: false
+})
 
 const RecenterAutomatically = ({ lat, lng }) => {
   const map = useMap();
@@ -16,6 +21,7 @@ const RecenterAutomatically = ({ lat, lng }) => {
   }, [lat, lng]);
   return null;
 }
+
 
 export default function ControllerBookingRequestMap({ bookingId, position, booking }) {
   const token = localStorage.getItem('token')
@@ -46,7 +52,7 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
       response?.data?.data?.map((ambulance) => {
         setAmbulances(ambulances => (
           { ...ambulances, [ambulance._id]: ambulance }
-        ))
+          ))
       })
     })
     if(toastMsg.type) {
@@ -55,21 +61,32 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
       toast.error(toastMsg.message)
     }
   }, [position, toastMsg])
-
+  
+  useEffect(() => {
+    socket.connect();
+    // socket.on('get_new_location', data => {
+    //   console.log(data)
+    // })
+    // return() => {
+    //   socket.off('get_new_location')
+    // }
+  },[socket])
+  
   const bookHandler = async (id) => {
-    console.log(bookingId)
-    axios.post('/api/driver/update-booking-status', {
-      ambulanceId: id,
-      bookingId: bookingId
-    }, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(response => {
-        console.log(response.data)
-        setToastMsg({ type: response.data.success, message: response.data.message })
-      })
+    // axios.post('/api/driver/update-booking-status', {
+    //   ambulanceId: id,
+    //   bookingId: bookingId
+    // }, {
+    //   headers: {
+    //     'Authorization': `Bearer ${token}`
+    //   }
+    // })
+    // .then(response => {
+    //   console.log(response.data)
+    //   setToastMsg({ type: response.data.success, message: response.data.message })
+    // })
+    socket.emit('join', id)
+    socket.emit('update-booking-status',id)
   }
   return (
     <>

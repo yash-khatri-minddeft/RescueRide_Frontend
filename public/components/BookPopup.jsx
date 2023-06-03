@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function BookPopup({ socket, longitude, latitude, modalShow, setModalShow, hospitalID, setToastMsg }) {
 	const username = useRef();
 	const number = useRef();
+	const email = useRef();
 	const type = useRef();
 	const navigate = useNavigate();
 	const localBooking = JSON.parse(localStorage.getItem('bookingID')) || [];
@@ -15,6 +16,7 @@ export default function BookPopup({ socket, longitude, latitude, modalShow, setM
 		axios.post('/api/controller/add-booking', {
 			username: username.current.value,
 			number: number.current.value,
+			email: email.current.value,
 			user_longitude: longitude,
 			user_latitude: latitude,
 			hospitalid: hospitalID,
@@ -69,7 +71,15 @@ export default function BookPopup({ socket, longitude, latitude, modalShow, setM
 								<input type="number" id="phoneno" required ref={number} />
 							</div>
 						</div>
-						<div className="col-lg-12">
+						<div className="col-lg-6">
+							<div className="input-box">
+								<label htmlFor="email">
+									Your Email: <span>*</span>
+								</label>
+								<input type="email" id="email" required ref={email} />
+							</div>
+						</div>
+						<div className="col-lg-6">
 							<div className="input-box">
 								<label htmlFor="type">
 									Type: <span>*</span>

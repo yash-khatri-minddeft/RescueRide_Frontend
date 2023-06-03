@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import icon from './../../src/assets/images/hospital-icon.png'
 import ambIcon from './../../src/assets/images/ambulance-icon.png'
 import mapIcon from './../../src/assets/images/map-marker.png';
 import BookingDetailCurrentLocationRouter from './BookingDetailCurrentLocationRouter'
 import { Icon } from 'leaflet';
 
-export default function BookingDetailCurrentLocation({ userCoords, ambulanceCoords, hospitalCoords }) {
+export default function BookingDetailCurrentLocation({ bookingDetails, hospitalDetails, userCoords, ambulanceCoords, hospitalCoords }) {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const mapMarker = new Icon({
@@ -45,10 +45,20 @@ export default function BookingDetailCurrentLocation({ userCoords, ambulanceCoor
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      {userCoords && hospitalCoords && <BookingDetailCurrentLocationRouter userCoords={{latitude: latitude, longitude: longitude}} hospitalCoords={hospitalCoords} />}
-      <Marker position={[latitude, longitude]} icon={mapMarker}></Marker>
-      <Marker position={[ambulanceCoords.latitude, ambulanceCoords.longitude]} icon={ambulanceIcon}></Marker>
-      <Marker position={[hospitalCoords.latitude, hospitalCoords.longitude]} icon={hospitalIcon}></Marker>
+      {userCoords && hospitalCoords && <BookingDetailCurrentLocationRouter userCoords={{ latitude: userCoords.latitude, longitude: userCoords.longitude }} hospitalCoords={hospitalCoords} />}
+      <Marker position={[userCoords.latitude, userCoords.longitude]} icon={mapMarker}>
+        <Popup>
+          <h6 style={{ fontWeight: "600" }}>Your Location</h6>
+          {userCoords.latitude}, {userCoords.longitude}
+        </Popup>
+      </Marker>
+      <Marker position={[hospitalCoords.latitude, hospitalCoords.longitude]} icon={hospitalIcon}>
+        <Popup>
+          <h6 style={{ fontWeight: "600" }}>{hospitalDetails.address}</h6>
+          {hospitalDetails.latitude}, {hospitalDetails.longitude}
+        </Popup>
+      </Marker>
+      {bookingDetails.status == 'current' && <Marker position={[ambulanceCoords.latitude, ambulanceCoords.longitude]} icon={ambulanceIcon}></Marker>}
     </MapContainer>
   )
 }
