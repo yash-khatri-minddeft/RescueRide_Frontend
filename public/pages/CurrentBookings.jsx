@@ -67,7 +67,7 @@ export default function CurrentBookings({ checkLogin, checkCTRLLogin, checkDRIVE
                   <tr>
                     <th>Booking Id</th>
                     <th>Hospital Name</th>
-                    <th>Booking List</th>
+                    <th>Booking Status</th>
                   </tr>
                 </thead>
                 <tbody>

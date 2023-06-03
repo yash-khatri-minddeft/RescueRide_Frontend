@@ -445,11 +445,59 @@ button.button-white:hover,
 }
 
 .booking-list ul {
-  position: relative; 
+  position: relative;
 }
 
 .booking-list table th,
 .booking-list table td {
   padding: 15px;
   border: 1px solid var(--thm-border);
+}
+
+.booking-details {
+  position: relative;
+  padding: 60px 0;
+}
+
+.booking-details-card {
+  position: relative;
+  border: 1px solid var(--thm-border);
+}
+
+.booking-card-top {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: var(--thm-primary);
+}
+
+.booking-card-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.booking-card-bottom-left,
+.booking-card-bottom-right {
+  flex-grow: 1;
+  font-size: 18px;
+  padding: 40px 20px;
+}
+.booking-card-bottom-right {
+  border: 1px solid var(--thm-border);
+  margin: -1px;
+}
+.booking-card-status {
+  border-top: 1px solid var(--thm-border);
+  padding: 40px 20px;
+}
+.booking-card-status .icon {
+  max-width: 80px;
+}
+
+.leaflet-routing-alt {
+  max-height: 120px;
+}
+
+.leaflet-routing-container:has(.leaflet-routing-alternatives-container:empty) {
+  display: none;
 }

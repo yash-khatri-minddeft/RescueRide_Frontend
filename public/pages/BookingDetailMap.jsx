@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Header from './Header';
+import Header from '../components/Header';
+import BookingDetailMapComponent from '../components/BookingDetailMapComponent';
 
 export default function BookingDetailMap({ checkLogin, checkCTRLLogin, checkDRIVERLogin }) {
   const { bookingId } = useParams();
@@ -24,6 +25,9 @@ export default function BookingDetailMap({ checkLogin, checkCTRLLogin, checkDRIV
     })
   }, [])
   return (
-    <Header userType={userType} />
+    <>
+      <Header userType={userType} />
+      <BookingDetailMapComponent bookingId={bookingId} />
+    </>
   )
 }

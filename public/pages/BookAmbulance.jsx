@@ -44,6 +44,7 @@ export default function BookAmbulance({ checkLogin, checkCTRLLogin, checkDRIVERL
 
   return (
     <div className="book-ambulance">
+      {console.log(latitude, longitude)}
       <Header userType={userType} />
       {longitude && latitude && <BookingMap errorMessage={errorMessage} longitude={longitude} latitude={latitude} setLatitude={setLatitude} setLongitude={setLongitude} />}
     </div>

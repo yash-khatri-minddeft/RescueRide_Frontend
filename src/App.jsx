@@ -13,7 +13,7 @@ import HomePage from '../public/pages/HomePage';
 import BookAmbulance from '../public/pages/BookAmbulance';
 import ControllerSignIn from '../public/pages/ControllerSignIn';
 import BookingList from '../public/pages/BookingList';
-import BookingDetailMap from '../public/components/BookingDetailMap';
+import BookingDetailMap from '../public/pages/BookingDetailMap';
 import CurrentBookings from '../public/pages/CurrentBookings';
 import Historybooking from '../public/pages/HistoryBookings';
 import ControllerBookingRequest from '../public/pages/ControllerBookingRequest';
@@ -116,7 +116,7 @@ function App() {
           <Route path='/change-ctrl-pasword' element={<UpdateCTRLPass />} />
           <Route path='/controller-dashboard' element={<ControllerDashboard checkCTRLLogin={checkCTRLLogin} />} />
           <Route path='/book-ambulance' element={<BookAmbulance checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin} />} />
-          <Route path='/booking-list' element={<BookingList checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} />} checkDRIVERLogin={checkDRIVERLogin} />
+          <Route path='/booking-list' element={<BookingList checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin} />}  />
           <Route path='/current-booking' element={<CurrentBookings checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin} />} />
           <Route path='/history-booking' element={<Historybooking checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin} />} />
           <Route path='/booking-details/:bookingId' element={<BookingDetailMap checkLogin={checkLogin} checkCTRLLogin={checkCTRLLogin} checkDRIVERLogin={checkDRIVERLogin} />} />

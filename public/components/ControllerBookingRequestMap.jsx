@@ -5,6 +5,7 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import icon from './../../src/assets/images/ambulance-icon.png'
 import mapIcon from './../../src/assets/images/map-marker.png';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const RecenterAutomatically = ({ lat, lng }) => {
   const map = useMap();
@@ -16,9 +17,11 @@ const RecenterAutomatically = ({ lat, lng }) => {
   return null;
 }
 
-export default function ControllerBookingRequestMap({ position, booking }) {
+export default function ControllerBookingRequestMap({ bookingId, position, booking }) {
+  const token = localStorage.getItem('token')
   const [ambulances, setAmbulances] = useState([]);
   const [ambulanceNo, setAmbulanceNo] = useState();
+  const [toastMsg, setToastMsg] = useState({});
   const mapMarker = new Icon({
     iconUrl: mapIcon,
     iconSize: [30, 50]
@@ -39,24 +42,38 @@ export default function ControllerBookingRequestMap({ position, booking }) {
         Authorization: `Bearer ${token}`,
       }
     }).then(response => {
-      response?.data?.data?.map((el) => {
-        console.log(el)
+      setAmbulances([])
+      response?.data?.data?.map((ambulance) => {
         setAmbulances(ambulances => (
-          { ...ambulances, [el._id]: el }
-        ))
-        setAmbulances(ambulances => (
-          { ...ambulances, ['asd']: el }
+          { ...ambulances, [ambulance._id]: ambulance }
         ))
       })
     })
-  }, [position])
+    if(toastMsg.type) {
+      toast.success(toastMsg.message)
+    } else {
+      toast.error(toastMsg.message)
+    }
+  }, [position, toastMsg])
 
   const bookHandler = async (id) => {
-
+    console.log(bookingId)
+    axios.post('/api/driver/update-booking-status', {
+      ambulanceId: id,
+      bookingId: bookingId
+    }, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        console.log(response.data)
+        setToastMsg({ type: response.data.success, message: response.data.message })
+      })
   }
   return (
     <>
-      {console.log("suiii", ambulances)}
+      <ToastContainer />
       {position && booking &&
         <div className="booking-map" style={{ marginLeft: '400px' }}>
           <MapContainer eventHandlers={{
@@ -80,28 +97,16 @@ export default function ControllerBookingRequestMap({ position, booking }) {
               </Popup>
             </Marker>
             <MarkerClusterGroup>
-              {/* {ambulances?.map((ambulance, key) => {
+              {Object.keys(ambulances).map((key, index) => {
                 return (
-                  <Marker key={key} position={[ambulance.latitude, ambulance.longitude]} icon={ambulanceIcon}>
+                  <Marker key={index} position={[ambulances[key].latitude, ambulances[key].longitude]} icon={ambulanceIcon}>
                     <Popup>
                       <div className="hostpital-popup">
-                        <h4>{ambulance.AmbulanceNumber}</h4>
-                        <button onClick={() => bookHandler(ambulance._id)}>Book</button>
+                        <h4>{ambulances[key].AmbulanceNumber}</h4>
+                        <button onClick={() => bookHandler(ambulances[key]._id)}>Book</button>
                       </div>
                     </Popup>
                   </Marker>
-                )
-              })} */}
-              {Object.keys(ambulances).map((key, index) => {
-                console.log(ambulances[key])
-                return (
-                  <div key={index}>
-                    <h2>
-                      {key}: 
-                    </h2>
-
-                    <hr />
-                  </div>
                 );
               })}
             </MarkerClusterGroup>

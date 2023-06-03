@@ -26,15 +26,15 @@ export default function ControllerBookingRequest({ checkLogin, checkCTRLLogin, c
 
   }, [])
   useEffect(() => {
-    socket.connect();
-    socket.emit('join', bookingId)
-    socket.on('get_location', data => {
-      console.log('data', data)
-      setPosition({ latitude: response.data.data.user_latitude, longitude: response.data.data.user_longitude })
-    })
-    return () => {
-      socket.off('get_location')
-    }
+    // socket.connect();
+    // socket.emit('join', bookingId)
+    // socket.on('get_location', data => {
+    //   console.log('data', data)
+    //   // setPosition({ latitude: response.data.data.user_latitude, longitude: response.data.data.user_longitude })
+    // })
+    // return () => {
+    //   socket.off('get_location')
+    // }
   }, [socket])
   useEffect(() => {
     checkLogin().then((isLoggedIn) => {
@@ -57,7 +57,7 @@ export default function ControllerBookingRequest({ checkLogin, checkCTRLLogin, c
     <>
       <Header userType={userType} />
       <SideBar userType={userType} />
-      <ControllerBookingRequestMap position={position} booking={booking} />
+      <ControllerBookingRequestMap bookingId={bookingId} position={position} booking={booking} />
     </>
   )
 }
