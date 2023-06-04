@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function DriverDashboardComponent({ bookingDriver }) {
+  const token = localStorage.getItem("token");
+
+  const navigate = useNavigate();
+  const [bookingDriver, setbookingDriver] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    axios.post(
+      `/get-all-current-bookings`,
+      { id: id }.then((response) => {
+        if (response.data.success) {
+          if (response.data.data.bookingDriver) {
+            setbookingDriver(response.data.data.bookingDriver);
+          }
+        }
+      })
+    );
+  }, []);
   return (
     <div className="admin-dashboard-inner">
+      {isLoading && <Loader />}
       <div className="admin-dashboard-upper">
         <h2 className="dashboard-header">Booking Requests</h2>
       </div>
