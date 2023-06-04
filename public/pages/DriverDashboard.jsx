@@ -17,7 +17,7 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
 	const navigate = useNavigate();
 	const [bookings, setBookings] = useState([]);
 	const [driver, setDriver] = useState();
-	
+  const [toastMsg, setToastMsg] = useState();
 	const [isLoading, setIsLoading] = useState(false);
   const [modalShow, setModalShow] = useState(false);
 	useEffect(() => {
@@ -36,7 +36,7 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
 				setDriver(response.data.data)
 			}
 		})
-	}, [])
+	}, [modalShow])
 	useEffect(() => {
 		socket.on('get_new_location', data => {
 			console.log(data)
@@ -50,8 +50,8 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
 			{isLoading && <Loader />}
 			<Header userType='driver' />
 			<SideBar userType='driver' />
-			<DriverDashboardComponent setModalShow={setModalShow}/>
-			<ChangeDriverAvaibility show={modalShow} onHide={() => setModalShow(false)} id={driver?._id} />
+			<DriverDashboardComponent toastMsg={toastMsg} setToastMsg={setToastMsg} setModalShow={setModalShow} driver={driver}/>
+			<ChangeDriverAvaibility setToastMsg={setToastMsg} show={modalShow} onHide={() => setModalShow(false)} id={driver?._id} driver={driver} />
 		</div>
 	)
 }

@@ -356,7 +356,9 @@ button.button-white:hover,
 .admin-dashboard table tr td,
 .admin-dashboard table tr th,
 .controller-dashboard table tr td,
-.controller-dashboard table tr th {
+.controller-dashboard table tr th,
+.driver-dashboard table tr td,
+.driver-dashboard table tr th {
   border: 1px solid var(--thm-border);
   padding: 10px 20px;
   vertical-align: middle;
