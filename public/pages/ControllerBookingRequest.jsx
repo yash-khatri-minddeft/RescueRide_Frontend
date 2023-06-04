@@ -23,6 +23,7 @@ export default function ControllerBookingRequest({ checkLogin, checkCTRLLogin, c
           setBooking(response.data.data)
         }
       })
+      console.log('hi')
 
   }, [])
   useEffect(() => {
@@ -57,7 +58,7 @@ export default function ControllerBookingRequest({ checkLogin, checkCTRLLogin, c
     <>
       <Header userType={userType} />
       <SideBar userType={userType} />
-      <ControllerBookingRequestMap bookingId={bookingId} position={position} booking={booking} />
+      {booking?.status == 'pending' ? <ControllerBookingRequestMap bookingId={bookingId} position={position} booking={booking} /> : <div className='admin-dashboard-inner'><h2>Booking already done</h2></div>}
     </>
   )
 }

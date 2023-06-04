@@ -57,6 +57,7 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
     })
     if(toastMsg.type) {
       toast.success(toastMsg.message)
+      window.location.reload();
     } else {
       toast.error(toastMsg.message)
     }
