@@ -3,7 +3,7 @@ import axios from "axios";
 import Loader from "./Loader";
 import { ToastContainer, toast } from "react-toastify";
 
-export default function DriverDashboardComponent({ setModalShow, bookingDriver }) {
+export default function DriverDashboardComponent({ toastMsg, setToastMsg, setModalShow, driver }) {
   const changeAvailibility = async => {
     setModalShow(true)
   }
@@ -15,6 +15,7 @@ export default function DriverDashboardComponent({ setModalShow, bookingDriver }
   const [hospital, setHospital] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    console.log(driver)
     axios.post('/api/driver/get-all-current-bookings', {
       id: driver?._id
     }, {

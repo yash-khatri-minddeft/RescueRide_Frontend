@@ -1,13 +1,43 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import ModalHeader from "react-bootstrap/esm/ModalHeader";
+import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from "react-leaflet";
+import 'leaflet/dist/leaflet.css';
 import { toast } from "react-toastify";
+import mapIcon from './../../src/assets/images/hospital-icon.png'
+import { Icon } from 'leaflet';
+import LeafletControlGeocoder from "./LeafletControlGeocoder";
 
-export default function AddHospital({ show, hospitals, setHospitals, onHide }) {
+
+const RecenterAutomatically = ({ lat, lng }) => {
+  const map = useMap();
+  useEffect(() => {
+    map.setView([lat, lng], 11, {
+      animate: true
+    });
+  }, [lat, lng]);
+  return null;
+}
+
+
+export default function AddHospital({ show, hospitals, setHospitals, onHide, locationEnabled, latitudeState, longitudeState, setLatitudeState, setLongitudeState }) {
 	const address = useRef();
-	const longitude = useRef();
-	const latitude = useRef();
+	const mapMarker = new Icon({
+		iconUrl: mapIcon,
+		iconSize: [45, 50]
+	})
+	const MapEvents = () => {
+		useMapEvents({
+			click(e) {
+				// setState your coords here
+				// coords exist in "e.latlng.lat" and "e.latlng.lng"
+				setLatitudeState(e.latlng.lat)
+				setLongitudeState(e.latlng.lng)
+			},
+		});
+		return false;
+	}
 
 	const handleSubmit = async (e) => {
 		const token = localStorage.getItem("token");
@@ -16,8 +46,8 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide }) {
 			"/api/controller/admin-addhospital",
 			{
 				address: address.current.value,
-				longitude: longitude.current.value,
-				latitude: latitude.current.value,
+				longitude: longitudeState,
+				latitude: latitudeState,
 			},
 			{
 				headers: {
@@ -58,30 +88,54 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide }) {
 								<textarea id="address" autoFocus required ref={address} />
 							</div>
 						</div>
-						<div className="col-lg-6">
-							<div className="input-box">
-								<label htmlFor="latitude">
-									Latitude: <span>*</span>
-								</label>
-								<input type="number" step='0.00000000001' min="-90" max="90" id="latitude" required ref={latitude} />
-							</div>
-						</div>
-						<div className="col-lg-6">
-							<div className="input-box">
-								<label htmlFor="longitude">
-									Longitude: <span>*</span>
-								</label>
-								<input
-									type="number"
-									id="longitude"
-									required
-									min="-180"
-									max="180"
-									step='0.00000000001'
-									ref={longitude}
-								/>
-							</div>
-						</div>
+						{locationEnabled ?
+							<div className="col-lg-12">
+								<div className="add-ambulance-map" style={{ height: '250px' }}>
+									<MapContainer center={[latitudeState, longitudeState]} zoom={12}>
+										<TileLayer
+											url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+											attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+										/>
+										<LeafletControlGeocoder setLatitude={setLatitudeState} setLongitude={setLongitudeState} />
+										<Marker position={[latitudeState, longitudeState]} icon={mapMarker}>
+											<Popup>
+												<h6 style={{fontWeight: '600'}}>Your Location</h6>
+												{latitudeState.toFixed(7)}, {longitudeState.toFixed(7)}
+											</Popup>
+										</Marker>
+										<MapEvents />
+										<RecenterAutomatically lat={latitudeState} lng={longitudeState} />
+									</MapContainer>
+								</div>
+							</div> :
+							<>
+								<div className="col-lg-6">
+									<div className="input-box">
+										<label htmlFor="latitude">
+											Latitude: <span>*</span>
+										</label>
+										<input type="number" step='0.00000000001' value={locationEnabled && latitudeState.toFixed(7)} readOnly={locationEnabled} min="-90" max="90" id="latitude" required onChange={(e) => { setLatitudeState(e.target.value) }} />
+									</div>
+								</div>
+								<div className="col-lg-6">
+									<div className="input-box">
+										<label htmlFor="longitude">
+											Longitude: <span>*</span>
+										</label>
+										<input
+											type="number"
+											id="longitude"
+											required
+											onChange={(e) => { setLongitudeState(e.target.value) }}
+											readOnly={locationEnabled}
+											min="-180"
+											max="180"
+											step='0.00000000001'
+										/>
+									</div>
+								</div>
+							</>
+						}
 						<div className="col-lg-12">
 							<button>Create Hospital</button>
 						</div>

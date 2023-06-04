@@ -12,6 +12,9 @@ export default function Hospital({checkLogin}) {
   const [hospitals, setHospitals] = useState();
   const [modalShow, setModalShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+	const [latitudeState, setLatitudeState] = useState();
+	const [longitudeState, setLongitudeState] = useState();
+  const [locationEnabled, setLocationEnabled] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     checkLogin().then((isLoggedIn) => {
@@ -31,6 +34,30 @@ export default function Hospital({checkLogin}) {
       setIsLoading(false)
     }
     getHospitals()
+
+    if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position) => {
+				console.log(position.coords.latitude, position.coords.longitude)
+				// const newPosition = {
+				// 	id: ambulanceId,
+				// 	latitude: position.coords.latitude,
+				// 	longitude: position.coords.longitude
+				// }
+				setLatitudeState(position.coords.latitude)
+				setLongitudeState(position.coords.longitude)
+        setLocationEnabled(true)
+				// socket.emit('update_location', newPosition)
+			}, (err) => {
+				if (err.code === 1) {
+					alert('Please turn on location from settings or enter your location')
+				}
+        setLatitudeState(0)
+        setLongitudeState(0)
+			}, {
+				enableHighAccuracy: true,
+			});
+		}
+    
   }, [])
   return (
     <>
@@ -39,7 +66,7 @@ export default function Hospital({checkLogin}) {
         <Header userType="admin" />
         <SideBar userType='admin' />
         <HospitalComponent hospitals={hospitals} setModalShow={setModalShow}/>
-        <AddHospital show={modalShow} hospitals={hospitals} setHospitals={setHospitals} onHide={() => setModalShow(false)}/>
+        <AddHospital show={modalShow} hospitals={hospitals} setHospitals={setHospitals} onHide={() => setModalShow(false)}locationEnabled={locationEnabled} latitudeState={latitudeState} longitudeState={longitudeState} setLatitudeState={setLatitudeState} setLongitudeState={setLongitudeState} />
       </div>
     </>
   )
