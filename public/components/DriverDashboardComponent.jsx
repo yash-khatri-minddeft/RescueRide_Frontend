@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function DriverDashboardComponent({ bookingDriver }) {
+export default function DriverDashboardComponent() {
   const token = localStorage.getItem("token");
 
   const navigate = useNavigate();
