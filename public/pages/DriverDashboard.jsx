@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import DriverDashboardComponent from '../components/DriverDashboardComponent';
 import axios from 'axios';
+import ChangeDriverAvaibility from '../components/ChangeDriverAvaibility';
 
 const socket = io('http://localhost:8080', {
 	autoConnect: true
@@ -15,7 +16,10 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
   const token = localStorage.getItem('token');
 	const navigate = useNavigate();
 	const [bookings, setBookings] = useState([]);
+	const [driver, setDriver] = useState();
+	
 	const [isLoading, setIsLoading] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 	useEffect(() => {
 		checkDRIVERLogin().then((isLoggedIn) => {
 			if (!isLoggedIn) {
@@ -29,6 +33,7 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
 		}).then(response => {
 			if(response.data.success) {
 				socket.emit('join', response.data.data._id)
+				setDriver(response.data.data)
 			}
 		})
 	}, [])
@@ -45,7 +50,8 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
 			{isLoading && <Loader />}
 			<Header userType='driver' />
 			<SideBar userType='driver' />
-			<DriverDashboardComponent />
+			<DriverDashboardComponent setModalShow={setModalShow}/>
+			<ChangeDriverAvaibility show={modalShow} onHide={() => setModalShow(false)} id={driver?._id} />
 		</div>
 	)
 }

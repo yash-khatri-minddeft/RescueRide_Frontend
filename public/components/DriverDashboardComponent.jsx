@@ -2,11 +2,16 @@ import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function DriverDashboardComponent({ bookingDriver }) {
+export default function DriverDashboardComponent({ setModalShow, bookingDriver }) {
+  const changeAvailibility = async => {
+    setModalShow(true)
+  }
+
   return (
     <div className="admin-dashboard-inner">
       <div className="admin-dashboard-upper">
         <h2 className="dashboard-header">Booking Requests</h2>
+        <button onClick={changeAvailibility}>Change Ambulance Availibility</button>
       </div>
       <div className="table-responsive">
         {bookingDriver?.length ? (
