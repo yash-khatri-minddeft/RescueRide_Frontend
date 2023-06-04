@@ -57,7 +57,7 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
     })
     if(toastMsg.type) {
       toast.success(toastMsg.message)
-      window.location.reload();
+      // window.location.reload();
     } else {
       toast.error(toastMsg.message)
     }
@@ -74,20 +74,20 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
   },[socket])
   
   const bookHandler = async (id) => {
-    axios.post('/api/driver/update-booking-status', {
-      ambulanceId: id,
-      bookingId: bookingId
-    }, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    .then(response => {
-      console.log(response.data)
-      setToastMsg({ type: response.data.success, message: response.data.message })
-    })
+    // axios.post('/api/driver/update-booking-status', {
+    //   ambulanceId: id,
+    //   bookingId: bookingId
+    // }, {
+    //   headers: {
+    //     'Authorization': `Bearer ${token}`
+    //   }
+    // })
+    // .then(response => {
+    //   console.log(response.data)
+    //   setToastMsg({ type: response.data.success, message: response.data.message })
+    // })
     socket.emit('join', id)
-    socket.emit('update-booking-status',id)
+    socket.emit('update-booking-status',[booking, id])
   }
   return (
     <>

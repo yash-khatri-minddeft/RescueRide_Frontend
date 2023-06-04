@@ -23,8 +23,6 @@ export default function ControllerBookingRequest({ checkLogin, checkCTRLLogin, c
           setBooking(response.data.data)
         }
       })
-      console.log('hi')
-
   }, [])
   useEffect(() => {
     // socket.connect();
