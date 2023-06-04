@@ -28,7 +28,7 @@ export default function OTPComponent({setIsProcessing, maskedEmail, userType}) {
 				<div className="login-input-container">
 					<div className="input-box">
 						<label htmlFor="OTP">OTP: <span>*</span></label>
-						<input type="password" id='OTP' ref={otp} />
+						<input type="password" autoFocus id='OTP' ref={otp} />
 					</div>
 					<div className="input-box" style={{ marginTop: "15px" }}>
 						<button type='submit'>Sign In</button>
