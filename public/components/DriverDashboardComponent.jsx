@@ -3,7 +3,7 @@ import axios from "axios";
 import Loader from "./Loader";
 import { ToastContainer, toast } from "react-toastify";
 
-export default function DriverDashboardComponent({ toastMsg, setToastMsg, setModalShow, driver }) {
+export default function DriverDashboardComponent({ setModalShow, bookingDriver }) {
   const changeAvailibility = async => {
     setModalShow(true)
   }
@@ -82,8 +82,7 @@ export default function DriverDashboardComponent({ toastMsg, setToastMsg, setMod
       {isLoading && <Loader />}
       <div className="admin-dashboard-upper">
         <h2 className="dashboard-header">Booking Requests</h2>
-        {console.log(driver?.Status)}
-        {(driver?.Status == 'ideal' || driver?.Status == 'N/A') && <button onClick={changeAvailibility}>Change Ambulance Availibility</button>}
+        <button onClick={changeAvailibility}>Change Ambulance Availibility</button>
       </div>
       <div className="table-responsive">
         {booking && hospital ?
