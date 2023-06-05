@@ -49,6 +49,8 @@ export default function DriverDashboardComponent({ toastMsg, setToastMsg, setMod
   useEffect(() => {
 		socket.on('get_new_location', data => {
 			console.log(data)
+      setBooking(data[0])
+      setHospital(data[1])
 		})
 		return() => {
 			socket.off('get_new_location')
