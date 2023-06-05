@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { io } from 'socket.io-client';
 
-const socket = io('https://api-rescueride.onrender.com:8080', {
+const socket = io('http://localhost:8080', {
   autoConnect: false
 })
 

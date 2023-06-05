@@ -8,7 +8,7 @@ import axios from 'axios';
 import ChangeDriverAvaibility from '../components/ChangeDriverAvaibility';
 import { io } from "socket.io-client";
 
-const socket = io('https://api-rescueride.onrender.com:8080', {
+const socket = io('http://localhost:8080', {
 	autoConnect: true
 })
 export default function DriverDashboard({ checkDRIVERLogin }) {
