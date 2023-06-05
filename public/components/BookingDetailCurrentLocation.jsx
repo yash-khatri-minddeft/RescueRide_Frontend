@@ -7,7 +7,7 @@ import BookingDetailCurrentLocationRouter from './BookingDetailCurrentLocationRo
 import { Icon } from 'leaflet';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:8080', {
+const socket = io('https://api-rescueride.onrender.com:8080', {
   autoConnect: true
 })
 

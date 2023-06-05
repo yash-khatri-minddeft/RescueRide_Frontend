@@ -7,7 +7,7 @@ import ControllerBookingList from '../components/ControllerBookingList';
 import Loader from '../components/Loader';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:8080', {
+const socket = io('https://api-rescueride.onrender.com:8080', {
   autoConnect: false
 })
 
