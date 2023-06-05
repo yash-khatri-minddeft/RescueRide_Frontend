@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
 import { ToastContainer, toast } from "react-toastify";
+import { io } from "socket.io-client";
+
+const socket = io('http://localhost:8080', {
+	autoConnect: true
+})
 
 
-export default function DriverDashboardComponent({ booking, setBooking, hospital, setHospital, toastMsg, setToastMsg, setModalShow, driver }) {
+export default function DriverDashboardComponent({ toastMsg, setToastMsg, setModalShow, driver }) {
   const changeAvailibility = async => {
     setModalShow(true)
   }
@@ -12,6 +17,8 @@ export default function DriverDashboardComponent({ booking, setBooking, hospital
   const token = localStorage.getItem("token");
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
+  const [booking, setBooking] = useState();
+  const [hospital, setHospital] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axios.post('/api/driver/get-all-current-bookings', {
@@ -39,6 +46,16 @@ export default function DriverDashboardComponent({ booking, setBooking, hospital
       toast.error(toastMsg?.message)
     }
   }, [toastMsg])
+  useEffect(() => {
+		socket.on('get_new_location', data => {
+			console.log(data)
+      setBooking(data[0])
+      setHospital(data[1])
+		})
+		return() => {
+			socket.off('get_new_location')
+		}
+	},[socket])
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {

@@ -19,8 +19,6 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
   const [toastMsg, setToastMsg] = useState();
 	const [isLoading, setIsLoading] = useState(false);
   const [modalShow, setModalShow] = useState(false);
-  const [booking, setBooking] = useState();
-  const [hospital, setHospital] = useState();
 	useEffect(() => {
 		checkDRIVERLogin().then((isLoggedIn) => {
 			if (!isLoggedIn) {
@@ -38,22 +36,12 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
 			}
 		})
 	}, [modalShow])
-  useEffect(() => {
-		socket.on('get_new_location', data => {
-			console.log(data)
-      setBooking(data[0])
-      setHospital(data[1])
-		})
-		return() => {
-			socket.off('get_new_location')
-		}
-	},[socket])
 	return (
 		<div className='driver-dashboard'>
 			{isLoading && <Loader />}
 			<Header userType='driver' />
 			<SideBar userType='driver' />
-			<DriverDashboardComponent booking={booking} setBooking={setBooking} hospital={hospital} setHospital={setHospital} toastMsg={toastMsg} setToastMsg={setToastMsg} setModalShow={setModalShow} driver={driver}/>
+			<DriverDashboardComponent toastMsg={toastMsg} setToastMsg={setToastMsg} setModalShow={setModalShow} driver={driver}/>
 			<ChangeDriverAvaibility setToastMsg={setToastMsg} show={modalShow} onHide={() => setModalShow(false)} id={driver?._id} driver={driver} />
 		</div>
 	)
