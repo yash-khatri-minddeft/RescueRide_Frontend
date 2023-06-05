@@ -49,30 +49,34 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
       }
     }).then(response => {
       setAmbulances([])
+      console.log(response)
       response?.data?.data?.map((ambulance) => {
         setAmbulances(ambulances => (
           { ...ambulances, [ambulance._id]: ambulance }
-          ))
+        ))
       })
     })
-    if(toastMsg.type) {
+    if (toastMsg.type) {
       toast.success(toastMsg.message)
       window.location.reload();
     } else {
       toast.error(toastMsg.message)
     }
   }, [position, toastMsg])
-  
+
   useEffect(() => {
     socket.connect();
-    // socket.on('get_new_location', data => {
-    //   console.log(data)
-    // })
-    // return() => {
-    //   socket.off('get_new_location')
-    // }
-  },[socket])
-  
+    socket.on('get_location', data => {
+      console.log(data)
+      setAmbulances(ambulances => (
+        { ...ambulances, [data._id]: data }
+      ))
+    })
+    return () => {
+      socket.off('get_location')
+    }
+  }, [socket])
+
   const bookHandler = async (id) => {
     axios.post('/api/driver/update-booking-status', {
       ambulanceId: id,
@@ -82,12 +86,12 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
         'Authorization': `Bearer ${token}`
       }
     })
-    .then(response => {
-      console.log(response.data)
-      setToastMsg({ type: response.data.success, message: response.data.message })
-    })
+      .then(response => {
+        console.log(response.data)
+        setToastMsg({ type: response.data.success, message: response.data.message })
+      })
     socket.emit('join', id)
-    socket.emit('update-booking-status',[booking, id])
+    socket.emit('update-booking-status', [booking, id])
   }
   return (
     <>

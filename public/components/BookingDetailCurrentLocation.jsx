@@ -5,8 +5,13 @@ import ambIcon from './../../src/assets/images/ambulance-icon.png'
 import mapIcon from './../../src/assets/images/map-marker.png';
 import BookingDetailCurrentLocationRouter from './BookingDetailCurrentLocationRouter'
 import { Icon } from 'leaflet';
+import { io } from 'socket.io-client';
 
-export default function BookingDetailCurrentLocation({ bookingDetails, hospitalDetails, userCoords, ambulanceCoords, hospitalCoords }) {
+const socket = io('http://localhost:8080', {
+  autoConnect: true
+})
+
+export default function BookingDetailCurrentLocation({ bookingDetails, ambulanceDetails, setAmbulanceDetails, hospitalDetails, userCoords, ambulanceCoords, hospitalCoords }) {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const mapMarker = new Icon({
@@ -22,7 +27,8 @@ export default function BookingDetailCurrentLocation({ bookingDetails, hospitalD
     iconSize: [25, 40]
   })
   useEffect(() => {
-    console.log('hi')
+    socket.emit('join', ambulanceDetails?._id)
+    console.log("id",ambulanceDetails?._id)
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setLatitude(position.coords.latitude)
@@ -38,6 +44,19 @@ export default function BookingDetailCurrentLocation({ bookingDetails, hospitalD
       setErrorMessage("Geolocation is not supported by this browser please enter your location");
     }
   }, [])
+
+  useEffect(() => {
+    socket.on('get_location_private', data => {
+      console.log("data",data._id)
+      console.log(data)
+      // if(ambulanceDetails?._id == data._id) {
+        setAmbulanceDetails(data)
+      // }
+    })
+    return () => {
+      socket.off('get_location_private')
+    }
+  }, [socket])
 
   return (
     <MapContainer>
@@ -58,7 +77,13 @@ export default function BookingDetailCurrentLocation({ bookingDetails, hospitalD
           {hospitalDetails.latitude}, {hospitalDetails.longitude}
         </Popup>
       </Marker>
-      {bookingDetails.status == 'current' && <Marker position={[ambulanceCoords.latitude, ambulanceCoords.longitude]} icon={ambulanceIcon}></Marker>}
+      {bookingDetails.status == 'current' &&
+        <Marker position={[ambulanceDetails?.latitude, ambulanceDetails.longitude]} icon={ambulanceIcon}>
+          <Popup>
+            <h6 style={{ fontWeight: '600' }}>{ambulanceDetails.AmbulanceNumber}</h6>
+            {ambulanceDetails.latitude}, {ambulanceDetails.longitude}
+          </Popup>
+        </Marker>}
     </MapContainer>
   )
 }
