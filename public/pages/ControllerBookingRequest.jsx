@@ -1,16 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Header from '../components/Header';
 import ControllerBookingRequestMap from '../components/ControllerBookingRequestMap';
 import SideBar from '../components/SideBar';
-import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:8080', {
-  autoConnect: false
-})
-
-export default function ControllerBookingRequest({ checkLogin, checkCTRLLogin, checkDRIVERLogin }) {
+export default function ControllerBookingRequest({ checkCTRLLogin }) {
+  const navigate = useNavigate();
   const { bookingId } = useParams();
   const [userType, setUserType] = useState();
   const [position, setPosition] = useState({ latitude: '', longitude: '' });
@@ -25,37 +21,16 @@ export default function ControllerBookingRequest({ checkLogin, checkCTRLLogin, c
       })
   }, [])
   useEffect(() => {
-    // socket.connect();
-    // socket.emit('join', bookingId)
-    // socket.on('get_location', data => {
-    //   console.log('data', data)
-    //   // setPosition({ latitude: response.data.data.user_latitude, longitude: response.data.data.user_longitude })
-    // })
-    // return () => {
-    //   socket.off('get_location')
-    // }
-  }, [socket])
-  useEffect(() => {
-    checkLogin().then((isLoggedIn) => {
-      if (isLoggedIn) {
-        setUserType('admin')
-      }
-    });
     checkCTRLLogin().then((isLoggedIn) => {
-      if (isLoggedIn) {
-        setUserType('controller')
+      if (!isLoggedIn) {
+        navigate('/controller-signin')
       }
     });
-    checkDRIVERLogin().then((isLoggedIn) => {
-      if (isLoggedIn) {
-        setUserType('driver')
-      }
-    })
   }, [])
   return (
     <>
-      <Header userType={userType} />
-      <SideBar userType={userType} />
+      <Header userType='controller' />
+      <SideBar userType='controller' />
       {booking?.status == 'pending' ? <ControllerBookingRequestMap bookingId={bookingId} position={position} booking={booking} /> : <div className='admin-dashboard-inner'><h2>Booking already done</h2></div>}
     </>
   )

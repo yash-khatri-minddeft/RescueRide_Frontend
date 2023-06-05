@@ -40,6 +40,7 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
 	useEffect(() => {
 		socket.on('get_new_location', data => {
 			console.log(data)
+			setDriver(data)
 		})
 		return() => {
 			socket.off('get_new_location')
