@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api/': 'https://api-rescueride.onrender.com'
+      '/api/': 'https://api-rescueride.onrender.com/'
     }
   }
 })
