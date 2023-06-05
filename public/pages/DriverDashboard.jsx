@@ -6,6 +6,11 @@ import SideBar from '../components/SideBar';
 import DriverDashboardComponent from '../components/DriverDashboardComponent';
 import axios from 'axios';
 import ChangeDriverAvaibility from '../components/ChangeDriverAvaibility';
+import { io } from "socket.io-client";
+
+const socket = io('http://localhost:8080', {
+	autoConnect: true
+})
 export default function DriverDashboard({ checkDRIVERLogin }) {
   const token = localStorage.getItem('token');
 	const navigate = useNavigate();
