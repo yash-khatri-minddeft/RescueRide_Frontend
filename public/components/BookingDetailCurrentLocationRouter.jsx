@@ -19,7 +19,8 @@ export default function BookingDetailCurrentLocationRouter({ userCoords, hospita
         routeWhileDragging: true,
         addWaypoints: false,
         draggableWaypoints: true,
-        createMarker: function () { return null; }, lineOptions: {
+        createMarker: function () { return null; },
+        lineOptions: {
           styles: [
             {
               color: "#325863",
