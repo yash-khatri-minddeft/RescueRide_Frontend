@@ -15,7 +15,6 @@ export default function DriverDashboardComponent({ toastMsg, setToastMsg, setMod
   const [hospital, setHospital] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    console.log(driver)
     axios.post('/api/driver/get-all-current-bookings', {
       id: driver?._id
     }, {
