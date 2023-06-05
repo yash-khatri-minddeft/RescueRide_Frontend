@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
 import { ToastContainer, toast } from "react-toastify";
+import { io } from "socket.io-client";
+
+const socket = io('http://localhost:8080', {
+	autoConnect: true
+})
+
 
 export default function DriverDashboardComponent({ toastMsg, setToastMsg, setModalShow, driver }) {
   const changeAvailibility = async => {
@@ -40,6 +46,14 @@ export default function DriverDashboardComponent({ toastMsg, setToastMsg, setMod
       toast.error(toastMsg?.message)
     }
   }, [toastMsg])
+  useEffect(() => {
+		socket.on('get_new_location', data => {
+			console.log(data)
+		})
+		return() => {
+			socket.off('get_new_location')
+		}
+	},[socket])
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {

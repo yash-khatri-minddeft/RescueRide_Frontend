@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { io } from 'socket.io-client';
 import Loader from '../components/Loader';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import DriverDashboardComponent from '../components/DriverDashboardComponent';
 import axios from 'axios';
 import ChangeDriverAvaibility from '../components/ChangeDriverAvaibility';
-
-const socket = io('http://localhost:8080', {
-	autoConnect: true
-})
-
 export default function DriverDashboard({ checkDRIVERLogin }) {
   const token = localStorage.getItem('token');
 	const navigate = useNavigate();
@@ -37,15 +31,6 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
 			}
 		})
 	}, [modalShow])
-	useEffect(() => {
-		socket.on('get_new_location', data => {
-			console.log(data)
-			setDriver(data)
-		})
-		return() => {
-			socket.off('get_new_location')
-		}
-	},[socket])
 	return (
 		<div className='driver-dashboard'>
 			{isLoading && <Loader />}
