@@ -19,7 +19,6 @@ export default function ControllerBookingList({ bookings }) {
                 <th>Hospital Name</th>
                 <th>Action</th>
               </tr>
-              {/* {console.log(hospitalName)} */}
             </thead>
             <tbody>
               {bookings?.map((booking, key) => {
