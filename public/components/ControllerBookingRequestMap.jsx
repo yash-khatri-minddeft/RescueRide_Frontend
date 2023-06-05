@@ -91,7 +91,7 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
         setToastMsg({ type: response.data.success, message: response.data.message })
       })
     socket.emit('join', id)
-    socket.emit('update-booking-status', [booking, id])
+    socket.emit('update-booking-status-socket', [booking, id])
   }
   return (
     <>

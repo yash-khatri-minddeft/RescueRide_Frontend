@@ -26,20 +26,18 @@ export default function CurrentBookings({ checkLogin, checkCTRLLogin, checkDRIVE
   }, [])
 
   const localBooking = JSON.parse(localStorage.getItem('bookingID')) || [];
-  const [hospitalName, setHospitalName] = useState([]);
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     if (localBooking.length) {
       localBooking.map((id) => {
         axios.post('api/controller/get-pending-booking', { id: id, status: 'current' })
-          .then(response => {
-            if (response.data.data != null) {
-              setBookings((bookings) => [...bookings, response.data.data])
-              axios.post('api/controller/get-hospital-by-id', { id: response.data.data.hospitalid })
-                .then(response => {
-                  if (response.data.success) {
-                    setHospitalName((hospitalName) => [...hospitalName, response.data.data.address])
+          .then(booking => {
+            if (booking.data.data != null) {
+              axios.post('api/controller/get-hospital-by-id', { id: booking.data.data.hospitalid })
+                .then(hospital => {
+                  if (hospital.data.success) {
+                    setBookings((bookings) => [...bookings, { booking: booking.data.data, hospital: hospital.data.data }])
                     setIsLoading(false)
                   }
                 })
@@ -72,7 +70,7 @@ export default function CurrentBookings({ checkLogin, checkCTRLLogin, checkDRIVE
                 </thead>
                 <tbody>
                   {bookings?.map((booking, key) => {
-                    return (<ClientBookingList key={key} hospitalName={hospitalName[key]} id={booking._id} status={booking.status} />)
+                    return (<ClientBookingList key={key} hospitalName={booking.hospital.address} id={booking.booking._id} status={booking.booking.status} />)
                   })}
                 </tbody>
               </table> :
