@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { io } from "socket.io-client";
 
 const socket = io('https://api-rescueride.onrender.com/', {
-	autoConnect: true
+  autoConnect: true
 })
 
 
@@ -21,24 +21,34 @@ export default function DriverDashboardComponent({ toastMsg, setToastMsg, setMod
   const [hospital, setHospital] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    axios.post('/api/driver/get-all-current-bookings', {
-      id: driver?._id
-    }, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    }).then(response => {
-      if (response.data.success) {
-        setBooking(response.data.data)
-        console.log(response.data)
-        axios.post('/api/controller/get-hospital-by-id', {
-          id: response?.data?.data?.hospitalid
-        }).then(getHospital => {
-          setHospital(getHospital.data.data)
-          setIsLoading(false)
-        })
-      }
-    })
+    try {
+
+      axios.post('/api/driver/get-all-current-bookings', {
+        id: driver?._id
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }).then(response => {
+        if (response.data.success) {
+          setBooking(response.data.data)
+          console.log(response.data)
+          if (response?.data?.data) {
+            axios.post('/api/controller/get-hospital-by-id', {
+              id: response?.data?.data?.hospitalid
+            }).then(getHospital => {
+              setHospital(getHospital.data.data)
+              setIsLoading(false)
+            })
+          }
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+
+    }
   }, [driver, toastMsg]);
   useEffect(() => {
     if (toastMsg?.type) {
@@ -48,15 +58,15 @@ export default function DriverDashboardComponent({ toastMsg, setToastMsg, setMod
     }
   }, [toastMsg])
   useEffect(() => {
-		socket.on('get_new_location', data => {
-			console.log(data)
+    socket.on('get_new_location', data => {
+      console.log(data)
       setBooking(data[0])
       setHospital(data[1])
-		})
-		return() => {
-			socket.off('get_new_location')
-		}
-	},[socket])
+    })
+    return () => {
+      socket.off('get_new_location')
+    }
+  }, [socket])
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
