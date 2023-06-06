@@ -68,9 +68,11 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
     socket.connect();
     socket.on('get_location', data => {
       console.log(data)
-      setAmbulances(ambulances => (
-        { ...ambulances, [data._id]: data }
-      ))
+      if (booking?.type_of_ambulance == data.type_of_ambulance) {
+        setAmbulances(ambulances => (
+          { ...ambulances, [data._id]: data }
+        ))
+      }
     })
     return () => {
       socket.off('get_location')

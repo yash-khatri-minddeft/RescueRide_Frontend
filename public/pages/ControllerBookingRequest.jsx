@@ -31,7 +31,10 @@ export default function ControllerBookingRequest({ checkCTRLLogin }) {
     <>
       <Header userType='controller' />
       <SideBar userType='controller' />
-      {booking?.status == 'pending' ? <ControllerBookingRequestMap bookingId={bookingId} position={position} booking={booking} /> : <div className='admin-dashboard-inner'><h2>Booking already done</h2></div>}
+      {booking?.status == 'pending' ?
+        <ControllerBookingRequestMap bookingId={bookingId} position={position} booking={booking} /> :
+        <div className='admin-dashboard-inner'><h2>Booking already done</h2></div>
+      }
     </>
   )
 }
