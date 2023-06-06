@@ -35,7 +35,7 @@ export default function BookingMap({ errorMessage, longitude, latitude, setLatit
   const [modalShow, setModalShow] = useState(false);
   const [toastMsg, setToastMsg] = useState({ type: '', message: '' });
   useEffect(() => {
-    axios.post('/api/controller/user-gethospital', { latitude: latitude, longitude: longitude })
+    axios.get('/api/controller/user-gethospital')
       .then(response => {
         setHospitals(response.data.data)
       })

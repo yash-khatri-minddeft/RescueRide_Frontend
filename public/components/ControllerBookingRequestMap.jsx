@@ -40,8 +40,6 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		axios.post('/api/controller/controller-getambulance', {
-			latitude: position.latitude,
-			longitude: position.longitude,
 			type: booking?.type_of_ambulance
 		}, {
 			headers: {
