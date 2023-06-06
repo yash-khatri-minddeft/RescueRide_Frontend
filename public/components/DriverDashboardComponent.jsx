@@ -30,13 +30,14 @@ export default function DriverDashboardComponent({ toastMsg, setToastMsg, setMod
     }).then(response => {
       if (response.data.success) {
         setBooking(response.data.data)
+        console.log(response.data)
         axios.post('/api/controller/get-hospital-by-id', {
           id: response?.data?.data?.hospitalid
         }).then(getHospital => {
           setHospital(getHospital.data.data)
+          setIsLoading(false)
         })
       }
-      setIsLoading(false)
     })
   }, [driver, toastMsg]);
   useEffect(() => {
