@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://jsonplaceholder.typicode.com',
+        target: 'https://api-rescueride.onrender.com',
         changeOrigin: true,
         secure: false
       }
