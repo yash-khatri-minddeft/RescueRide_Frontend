@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { io } from 'socket.io-client';
 import BookPopup from './BookPopup';
 
-const socket = io('http://localhost:8080', {
+const socket = io('https://api-rescueride.onrender.com/', {
   autoConnect: false
 })
 

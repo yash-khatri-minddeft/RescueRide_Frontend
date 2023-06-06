@@ -4,7 +4,7 @@ import Loader from "./Loader";
 import { ToastContainer, toast } from "react-toastify";
 import { io } from "socket.io-client";
 
-const socket = io('http://localhost:8080', {
+const socket = io('https://api-rescueride.onrender.com/', {
 	autoConnect: true
 })
 

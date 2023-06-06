@@ -7,7 +7,7 @@ import SideBar from '../components/SideBar';
 import AmbulanceLocationComponent from '../components/AmbulanceLocationComponent';
 import axios from 'axios';
 
-const socket = io('http://localhost:8080', {
+const socket = io('https://api-rescueride.onrender.com/', {
   autoConnect: false
 })
 
