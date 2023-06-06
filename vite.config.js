@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://api-rescueride.onrender.com/',
+        target: 'https://api-rescueride.onrender.com',
         changeOrigin: true,
       }
     }
