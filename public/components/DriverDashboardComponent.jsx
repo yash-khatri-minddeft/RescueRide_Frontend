@@ -4,12 +4,8 @@ import Loader from "./Loader";
 import { ToastContainer, toast } from "react-toastify";
 import { io } from "socket.io-client";
 
-const socket = io('https://api-rescueride.onrender.com/', {
-  autoConnect: true
-})
 
-
-export default function DriverDashboardComponent({ toastMsg, setToastMsg, setModalShow, driver }) {
+export default function DriverDashboardComponent({ socket, toastMsg, setToastMsg, setModalShow, driver }) {
   const changeAvailibility = async => {
     setModalShow(true)
   }
@@ -40,14 +36,16 @@ export default function DriverDashboardComponent({ toastMsg, setToastMsg, setMod
               setHospital(getHospital.data.data)
               setIsLoading(false)
             })
+          } else {
+            setIsLoading(false)
           }
+        } else {
+          setIsLoading(false)
         }
       })
     } catch (error) {
       console.log(error)
-    } finally {
       setIsLoading(false)
-
     }
   }, [driver, toastMsg]);
   useEffect(() => {
@@ -58,6 +56,7 @@ export default function DriverDashboardComponent({ toastMsg, setToastMsg, setMod
     }
   }, [toastMsg])
   useEffect(() => {
+    socket.connect();
     socket.on('get_new_location', data => {
       console.log(data)
       setBooking(data[0])

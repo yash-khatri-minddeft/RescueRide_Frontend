@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { io } from 'socket.io-client';
 import Loader from '../components/Loader';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import AmbulanceLocationComponent from '../components/AmbulanceLocationComponent';
 import axios from 'axios';
 
-const socket = io('https://api-rescueride.onrender.com/', {
-  autoConnect: false
-})
 
 export default function AmbulanceLocation({ checkDRIVERLogin }) {
   const navigate = useNavigate();
