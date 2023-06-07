@@ -42,7 +42,6 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
 			{isLoading && <Loader />}
 			<Header userType='driver' />
 			<SideBar userType='driver' />
-			{console.log(driver)}
 			<DriverDashboardComponent socket={socket} toastMsg={toastMsg} setToastMsg={setToastMsg} setModalShow={setModalShow} driver={driver}/>
 			<ChangeDriverAvaibility setToastMsg={setToastMsg} show={modalShow} onHide={() => setModalShow(false)} id={driver?._id} driver={driver} />
 		</div>
