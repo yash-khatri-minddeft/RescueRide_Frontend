@@ -536,3 +536,10 @@ button.button-white:hover,
 .ambulance-route-map .leaflet-routing-alt {
   max-height: 410px;
 }
+
+.ambulance-route-map .leaflet-routing-alt table th,
+.ambulance-route-map .leaflet-routing-alt table td {
+  padding: 2px;
+  vertical-align: middle;
+  border: 0;
+}
