@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 
 
 export default function DriverDashboardComponent({ socket, toastMsg, setToastMsg, setModalShow, driver }) {
-  const changeAvailibility = async => {
+  const changeAvailibility = async() => {
     setModalShow(true)
   }
 

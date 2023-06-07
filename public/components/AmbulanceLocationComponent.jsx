@@ -7,23 +7,28 @@ const socket = io('https://api-rescueride.onrender.com/', {
 })
 
 export default function AmbulanceLocationComponent({ ambulanceId }) {
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
-  const token = localStorage.getItem('token')
+  var lastLatitude = localStorage.getItem('lastLatitude'), lastLongitude = localStorage.getItem('lastLongitude');
+  const [latitude, setLatitude] = useState(lastLatitude);
+  const [longitude, setLongitude] = useState(lastLongitude);
+  const token = localStorage.getItem('token');
   useEffect(() => {
     socket.connect();
     const getLocation = () => {
+      lastLatitude = localStorage.getItem('lastLatitude'), lastLongitude = localStorage.getItem('lastLongitude');
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          console.log(position.coords.latitude, position.coords.longitude)
           const newPosition = {
             id: ambulanceId,
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           }
-          setLatitude(newPosition.latitude)
-          setLongitude(newPosition.longitude)
-          socket.emit('update_location', newPosition)
+          if(lastLatitude != position.coords.latitude || lastLongitude != position.coords.longitude) {
+            setLatitude(position.coords.latitude)
+            setLongitude(position.coords.longitude);
+            localStorage.setItem('lastLatitude', position.coords.latitude)
+            localStorage.setItem('lastLongitude', position.coords.longitude)
+            socket.emit('update_location', newPosition)
+          }
         }, (err) => {
           if (err.code === 1) {
             setErrorMessage('Please turn on location from settings or enter your location')
@@ -36,6 +41,7 @@ export default function AmbulanceLocationComponent({ ambulanceId }) {
       }
     }
     if (ambulanceId) {
+      console.log(ambulanceId)
       setInterval(() => {
         getLocation()
       }, 5000)

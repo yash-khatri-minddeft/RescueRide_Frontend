@@ -529,3 +529,10 @@ button.button-white:hover,
 .booking-card-ambulance-details {
   border-top: 1px solid var(--thm-border);
 }
+.route-link {
+  font-size: 22px;
+  padding: 10px 18px;
+}
+.ambulance-route-map .leaflet-routing-alt {
+  max-height: 410px;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import icon from './../../src/assets/images/hospital-icon.png'
 import ambIcon from './../../src/assets/images/ambulance-icon.png'
+import L from 'leaflet';
 import mapIcon from './../../src/assets/images/map-marker.png';
 import BookingDetailCurrentLocationRouter from './BookingDetailCurrentLocationRouter'
 import { Icon } from 'leaflet';
@@ -14,6 +15,7 @@ const socket = io('https://api-rescueride.onrender.com/', {
 export default function BookingDetailCurrentLocation({ bookingDetails, ambulanceDetails, setAmbulanceDetails, hospitalDetails, userCoords, ambulanceCoords, hospitalCoords }) {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const [waypoints, setWaypoints] = useState([L.latLng(userCoords?.latitude, userCoords?.longitude), L.latLng(hospitalCoords?.latitude, hospitalCoords?.longitude)])
   const mapMarker = new Icon({
     iconUrl: mapIcon,
     iconSize: [30, 50]
@@ -28,7 +30,7 @@ export default function BookingDetailCurrentLocation({ bookingDetails, ambulance
   })
   useEffect(() => {
     socket.emit('join', ambulanceDetails?._id)
-    console.log("id",ambulanceDetails?._id)
+    console.log("id", ambulanceDetails?._id)
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setLatitude(position.coords.latitude)
@@ -47,10 +49,10 @@ export default function BookingDetailCurrentLocation({ bookingDetails, ambulance
 
   useEffect(() => {
     socket.on('get_location_private', data => {
-      console.log("data",data._id)
+      console.log("data", data._id)
       console.log(data)
       // if(ambulanceDetails?._id == data._id) {
-        setAmbulanceDetails(data)
+      setAmbulanceDetails(data)
       // }
     })
     return () => {
@@ -60,11 +62,12 @@ export default function BookingDetailCurrentLocation({ bookingDetails, ambulance
 
   return (
     <MapContainer>
+      {console.log(waypoints)}
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      {userCoords && hospitalCoords && <BookingDetailCurrentLocationRouter userCoords={{ latitude: userCoords.latitude, longitude: userCoords.longitude }} hospitalCoords={hospitalCoords} />}
+      {userCoords && hospitalCoords && <BookingDetailCurrentLocationRouter waypoints={waypoints} />}
       <Marker position={[userCoords.latitude, userCoords.longitude]} icon={mapMarker}>
         <Popup>
           <h6 style={{ fontWeight: "600" }}>Your Location</h6>

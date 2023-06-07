@@ -20,6 +20,7 @@ import ControllerBookingRequest from '../public/pages/ControllerBookingRequest';
 import DriverSignIn from '../public/pages/DriverSignIn';
 import DriverDashboard from '../public/pages/DriverDashboard';
 import AmbulanceLocation from '../public/pages/AmbulanceLocation';
+import AmbulanceRoute from '../public/pages/AmbulanceRoute';
 
 function App() {
   const [userType, setUserType] = useState('guest');
@@ -124,6 +125,7 @@ function App() {
           <Route path="/driver-signin" element={<DriverSignIn checkDRIVERLogin={checkDRIVERLogin} />} />
           <Route path='/driver-dashboard' element={<DriverDashboard checkDRIVERLogin={checkDRIVERLogin} />} />
           <Route path='/ambulance-location' element={<AmbulanceLocation checkDRIVERLogin={checkDRIVERLogin} />} />
+          <Route path='/ambulance-route/:ambulanceId' element={<AmbulanceRoute checkLogin={checkLogin} />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -15,12 +15,13 @@ export default function AmbulanceComponent({ ambulances, setModalShow }) {
           <table className="table">
             <thead>
               <tr>
-                <th>AmbulanceNumber</th>
+                <th>Number</th>
                 <th>Status</th>
                 <th>Type</th>
                 <th>DriverName</th>
                 <th>DriverNo</th>
                 <th>DriverEmail</th>
+                <th>Route</th>
               </tr>
             </thead>
             <tbody>
