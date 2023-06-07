@@ -31,7 +31,6 @@ export default function DriverDashboard({ checkDRIVERLogin }) {
 			}
 		}).then(response => {
 			if(response.data.success) {
-				console.log(response.data.data._id)
 				socket.emit('join', response.data.data._id)
 				setDriver(response.data.data)
 			}

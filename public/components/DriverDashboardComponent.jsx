@@ -17,35 +17,40 @@ export default function DriverDashboardComponent({ socket, toastMsg, setToastMsg
   const [hospital, setHospital] = useState();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    try {
-
-      axios.post('/api/driver/get-all-current-bookings', {
-        id: driver?._id
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }).then(response => {
-        if (response.data.success) {
-          setBooking(response.data.data)
-          console.log(response.data)
-          if (response?.data?.data) {
-            axios.post('/api/controller/get-hospital-by-id', {
-              id: response?.data?.data?.hospitalid
-            }).then(getHospital => {
-              setHospital(getHospital.data.data)
+    if (driver) {
+      try {
+        axios.post('/api/driver/get-all-current-bookings', {
+          id: driver?._id
+        }, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }).then(response => {
+          if (response.data.success) {
+            setBooking(response.data.data)
+            if (response?.data?.data) {
+              axios.post('/api/controller/get-hospital-by-id', {
+                id: response?.data?.data?.hospitalid
+              }).then(getHospital => {
+                setHospital(getHospital.data.data)
+                setIsLoading(false)
+                console.log('hospital true')
+              }).finally(() => {
+                console.log('finallyy')
+                setIsLoading(false)
+              })
+            } else {
+              console.log('hospital false')
               setIsLoading(false)
-            })
+            }
           } else {
             setIsLoading(false)
           }
-        } else {
-          setIsLoading(false)
-        }
-      })
-    } catch (error) {
-      console.log(error)
-      setIsLoading(false)
+        })
+      } catch (err) {
+        console.log(err)
+        setIsLoading(false)
+      }
     }
   }, [driver, toastMsg]);
   useEffect(() => {
@@ -69,7 +74,6 @@ export default function DriverDashboardComponent({ socket, toastMsg, setToastMsg
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords.latitude, position.coords.longitude)
         setLatitude(position.coords.latitude)
         setLongitude(position.coords.longitude)
       }, (err) => {
@@ -98,6 +102,10 @@ export default function DriverDashboardComponent({ socket, toastMsg, setToastMsg
         // if (response.data.success) {
         setToastMsg({ type: response.data.success, message: response.data.message })
         setIsLoading(false)
+        if (response.data.success) {
+          setBooking()
+          setHospital()
+        }
         // }
       })
     }
