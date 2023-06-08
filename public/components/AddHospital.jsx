@@ -13,7 +13,7 @@ import LeafletControlGeocoder from "./LeafletControlGeocoder";
 const RecenterAutomatically = ({ lat, lng }) => {
   const map = useMap();
   useEffect(() => {
-    map.setView([lat, lng], 12, {
+    map.setView([lat, lng], map.getZoom(), {
       animate: true
     });
   }, [lat, lng]);
