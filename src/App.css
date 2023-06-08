@@ -335,6 +335,9 @@ button.button-white:hover,
   padding-top: 50px;
   padding-right: 40px;
 }
+.admin-dashboard-inner:has(.ambulance-route-map) {
+  padding: 0;
+}
 
 .dashboard-header {
   margin-bottom: 0;
