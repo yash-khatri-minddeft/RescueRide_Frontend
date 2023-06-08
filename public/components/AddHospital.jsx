@@ -13,7 +13,7 @@ import LeafletControlGeocoder from "./LeafletControlGeocoder";
 const RecenterAutomatically = ({ lat, lng }) => {
   const map = useMap();
   useEffect(() => {
-    map.setView([lat, lng], null, {
+    map.setView([lat, lng], undefined, {
       animate: true
     });
   }, [lat, lng]);
@@ -104,7 +104,7 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide, loc
 											</Popup>
 										</Marker>
 										<MapEvents />
-										<RecenterAutomatically lat={latitudeState} lng={longitudeState} />
+										{/* <RecenterAutomatically lat={latitudeState} lng={longitudeState} /> */}
 									</MapContainer>
 								</div>
 							</div> :
