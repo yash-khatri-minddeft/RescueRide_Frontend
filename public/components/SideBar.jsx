@@ -10,7 +10,6 @@ export default function SideBar({ userType }) {
   ]
   const controllerSidebar = [
     { text: 'Dashboard', link: '/controller-dashboard', icon: 'fa-solid fa-gauge' },
-    { text: 'Manage Ambulance', link: '/', icon: 'fa-solid fa-truck-medical' },
   ];
   const driverSidebar = [
     { text: 'Dashboard', link: '/driver-dashboard', icon: 'fa-solid fa-gauge' },
