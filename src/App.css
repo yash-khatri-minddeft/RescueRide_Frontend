@@ -252,7 +252,7 @@ button.button-white:hover,
   padding-left: 10px;
   background-color: #fff;
   top: 0;
-  z-index: 11111;
+  z-index: 1040;
 }
 .header-inner {
   display: flex;
