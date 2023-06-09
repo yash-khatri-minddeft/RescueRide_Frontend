@@ -250,6 +250,15 @@ button.button-white:hover,
   border-bottom: 1px solid var(--thm-border);
   padding-right: 40px;
   padding-left: 10px;
+  background-color: #fff;
+}
+
+.driver-dashboard .header,
+.admin-dashboard .header,
+.controller-dashboard .header {
+  position: sticky;
+  top: 0;
+  z-index: 11111;
 }
 
 .header-inner {
@@ -287,13 +296,33 @@ button.button-white:hover,
 .sidebar {
   background-color: #fff;
   width: 400px;
-  min-height: calc(100vh - 111px);
-  height: 100%;
-  position: absolute;
+  height: -webkit-fill-available;
+  position: fixed;
   overflow: auto;
   top: 111px;
   left: 0;
   border-right: 1px solid var(--thm-border);
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 8px;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
 }
 
 .sidebar ul {
@@ -335,6 +364,7 @@ button.button-white:hover,
   padding-top: 50px;
   padding-right: 40px;
 }
+
 .admin-dashboard-inner:has(.ambulance-route-map) {
   padding: 0;
 }
@@ -497,26 +527,32 @@ button.button-white:hover,
   padding: 40px 20px;
   flex: 1 1 0;
 }
+
 .booking-card-bottom-right {
   border: 1px solid var(--thm-border);
   margin: -1px;
 }
+
 .booking-card-status {
   border-top: 1px solid var(--thm-border);
   padding: 40px 20px;
 }
+
 .booking-card-status .icon {
   max-width: 80px;
 }
+
 .booking-card-ambulance-details {
   padding: 40px 20px 30px;
   font-size: 18px;
 }
+
 .booking-card-ambulance-details ul li {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
+
 .booking-card-ambulance-details ul li h5 {
   margin-bottom: 0;
   color: var(--thm-primary);
@@ -529,13 +565,16 @@ button.button-white:hover,
 .leaflet-routing-container:has(.leaflet-routing-alternatives-container:empty) {
   display: none;
 }
+
 .booking-card-ambulance-details {
   border-top: 1px solid var(--thm-border);
 }
+
 .route-link {
   font-size: 22px;
   padding: 10px 18px;
 }
+
 .ambulance-route-map .leaflet-routing-alt {
   max-height: 410px;
 }
