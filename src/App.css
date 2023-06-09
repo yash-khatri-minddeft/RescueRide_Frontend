@@ -245,22 +245,15 @@ button.button-white:hover,
 
 /* Header */
 .header {
-  position: relative;
+  position: sticky;
   padding: 20px 0;
   border-bottom: 1px solid var(--thm-border);
   padding-right: 40px;
   padding-left: 10px;
   background-color: #fff;
-}
-
-.driver-dashboard .header,
-.admin-dashboard .header,
-.controller-dashboard .header {
-  position: sticky;
   top: 0;
   z-index: 11111;
 }
-
 .header-inner {
   display: flex;
   align-items: center;
