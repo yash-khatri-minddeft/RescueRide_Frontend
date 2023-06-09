@@ -309,16 +309,12 @@ button.button-white:hover,
 }
 
 .sidebar::-webkit-scrollbar-track {
-  background: transparent;
+  background: #eee;
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background: transparent;
+  background: #bbb;
   border-radius: 8px;
-}
-
-.sidebar:hover::-webkit-scrollbar-thumb {
-  background: #ccc;
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover {
