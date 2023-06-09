@@ -254,6 +254,7 @@ button.button-white:hover,
   top: 0;
   z-index: 1040;
 }
+
 .header-inner {
   display: flex;
   align-items: center;
@@ -290,6 +291,10 @@ button.button-white:hover,
   background-color: #fff;
   width: 400px;
   height: -webkit-fill-available;
+  height: -moz-available;
+  height: -o-available;
+  height: -webkit-fill-available;
+  height: fill-available;
   position: fixed;
   overflow: auto;
   top: 111px;
