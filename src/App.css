@@ -290,10 +290,7 @@ button.button-white:hover,
 .sidebar {
   background-color: #fff;
   width: 400px;
-  height: -webkit-fill-available;
-  height: -moz-available;
-  height: -o-available;
-  height: -webkit-fill-available;
+  height: calc(100vh - 111px);
   height: fill-available;
   position: fixed;
   overflow: auto;
