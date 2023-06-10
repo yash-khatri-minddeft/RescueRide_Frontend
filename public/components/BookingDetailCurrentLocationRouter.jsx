@@ -17,6 +17,7 @@ export default function BookingDetailCurrentLocationRouter({ waypoints }) {
       waypoints: waypoints,
       showAlternatives: true,
       routeWhileDragging: true,
+      fitSelectedRoutes: true,
       addWaypoints: false,
       draggableWaypoints: true,
       createMarker: function () { return null; },
