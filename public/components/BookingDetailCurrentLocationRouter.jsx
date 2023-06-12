@@ -8,9 +8,7 @@ var routerPoints = null;
 export default function BookingDetailCurrentLocationRouter({ waypoints }) {
 
   const map = useMap();
-  // const waypoints = [];
   useEffect(() => {
-    console.log(waypoints)
     if(routerPoints !== null) {
       map.removeControl(routerPoints);
       routerPoints = null
@@ -19,6 +17,7 @@ export default function BookingDetailCurrentLocationRouter({ waypoints }) {
       waypoints: waypoints,
       showAlternatives: true,
       routeWhileDragging: true,
+      fitSelectedRoutes: true,
       addWaypoints: false,
       draggableWaypoints: true,
       createMarker: function () { return null; },
@@ -32,23 +31,7 @@ export default function BookingDetailCurrentLocationRouter({ waypoints }) {
         ]
       }
     }).addTo(map);
-  // }
-    // if (userCoords && hospitalCoords) {
-    //   setWaypoints([
-    //     L.latLng(userCoords.latitude, userCoords.longitude),
-    //     L.latLng(hospitalCoords.latitude, hospitalCoords.longitude)
-    //   ])
-    // }
-    // if (coords) {
-    //   coords.map((coord) => {
-    //     setWaypoints((waypoints) => [...waypoints, L.latLng(coord.r_latitude, coord.r_longitude)])
-    //     // waypoints.push(L.latLng(coord.r_latitude, coord.r_longitude))
-    //   })
-    // }
-    // const routes = document.querySelector('.leaflet-routing-container')
-    // if (waypoints) {
-    //   console.log(waypoints)
-      
+
   }, [waypoints])
   return null;
 }

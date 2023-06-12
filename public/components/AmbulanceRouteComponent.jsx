@@ -38,9 +38,9 @@ export default function AmbulanceRouteComponent({ ambulance }) {
   return (
     <div className="admin-dashboard-inner">
       {ambulance &&
-        <div className="ambulance-route-map" style={{ height: '500px' }}>
+        <div className="ambulance-route-map" style={{ height: '600px' }}>
           {console.log(ambulance)}
-          <MapContainer center={[0, 0]} zoom={12}>
+          <MapContainer center={[ambulance.route[0].r_latitude, ambulance.route[0].r_longitude]} zoom={12}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
