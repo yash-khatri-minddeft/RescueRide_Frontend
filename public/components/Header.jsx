@@ -48,7 +48,7 @@ export default function Header({ userType = 'guest' }) {
                 <li key={key}><NavLink to={list.link}>{list.text}</NavLink></li>
               )
             })}
-            {userType != 'guest' && <Link to={`/${userType}-dashboard`}>Dashboard</Link>}
+            {userType != 'guest' && <NavLink to={`/${userType}-dashboard`}>Dashboard</NavLink>}
           </ul>
         }
         <ul className='list-unstyled'></ul>
