@@ -38,7 +38,7 @@ export default function AmbulanceRouteComponent({ ambulance }) {
   return (
     <div className="admin-dashboard-inner">
       {ambulance &&
-        <div className="ambulance-route-map" style={{ height: '600px' }}>
+        <div className="ambulance-route-map">
           {console.log(ambulance)}
           <MapContainer center={[ambulance.route[0].r_latitude, ambulance.route[0].r_longitude]} zoom={12}>
             <TileLayer

@@ -97,7 +97,7 @@ export default function ControllerBookingRequestMap({ bookingId, position, booki
 		<>
 			<ToastContainer />
 			{position && booking &&
-				<div className="booking-map" style={{ marginLeft: '400px' }}>
+				<div className="controller-booking-map">
 					<MapContainer eventHandlers={{
 						click: (e) => {
 							console.log(e)

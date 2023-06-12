@@ -24,6 +24,7 @@ body {
   font-weight: 500;
 }
 
+
 a {
   font-weight: 500;
   color: var(--thm-primary);
@@ -270,6 +271,20 @@ button.button-white:hover,
   display: flex;
   align-items: center;
   column-gap: 30px;
+  margin-left: 45px;
+}
+
+@media (max-width: 1199px) {
+  .header-inner ul {
+    column-gap: 15px;
+    margin-left: 15px;
+  }
+}
+
+@media(max-width: 991px) {
+  .header ul {
+    display: none;
+  }
 }
 
 .header-nav a {
@@ -279,6 +294,35 @@ button.button-white:hover,
 .header-nav a:hover,
 .header-nav a.active {
   color: var(--thm-primary);
+}
+
+.admin-details {
+  position: relative;
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.admin-details .mobile-menu-toggler {
+  display: none;
+  cursor: pointer;
+}
+
+@media(max-width: 991px) {
+  .admin-details .mobile-menu-toggler {
+    display: block;
+  }
+}
+
+.admin-details .mobile-menu-toggler span {
+  height: 2px;
+  width: 20px;
+  background-color: var(--thm-color);
+  display: block;
+}
+
+.admin-details .mobile-menu-toggler span+span {
+  margin-top: 4px;
 }
 
 /* admin dashboard */
@@ -291,12 +335,29 @@ button.button-white:hover,
   background-color: #fff;
   width: 400px;
   height: calc(100vh - 111px);
-  height: fill-available;
   position: fixed;
   overflow: auto;
   top: 111px;
   left: 0;
   border-right: 1px solid var(--thm-border);
+}
+
+@media (max-width: 1199px) {
+  .sidebar {
+    width: 300px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    height: auto;
+    position: relative;
+    top: 0;
+    width: 100%;
+    padding: 40px 40px 0;
+    border: 0;
+    border-bottom: 0;
+  }
 }
 
 .sidebar::-webkit-scrollbar {
@@ -319,6 +380,14 @@ button.button-white:hover,
 .sidebar ul {
   display: flex;
   flex-direction: column;
+  margin-bottom: 0;
+}
+
+@media (max-width:767px) {
+  .sidebar ul {
+    border: 1px solid var(--thm-border);
+    border-bottom: 0;
+  }
 }
 
 .sidebar ul li {
@@ -354,8 +423,24 @@ button.button-white:hover,
   padding: 50px 40px 30px;
 }
 
+@media (max-width: 1199px) {
+  .admin-dashboard-inner {
+    margin-left: 300px;
+  }
+}
+
+
 .admin-dashboard-inner:has(.ambulance-route-map) {
   padding: 0;
+}
+
+@media (max-width: 767px) {
+  .admin-dashboard-inner {
+    margin-left: 0;
+  }
+  .admin-dashboard-inner:has(.ambulance-route-map) {
+    padding: 60px 0;
+  }
 }
 
 .dashboard-header {
@@ -377,6 +462,9 @@ button.button-white:hover,
   display: flex;
   align-items: center;
   justify-content: space-between;
+  column-gap: 30px;
+  row-gap: 40px;
+  flex-wrap: wrap;
   margin-bottom: 40px;
 }
 
@@ -439,17 +527,30 @@ button.button-white:hover,
   height: 100%;
 }
 
+.controller-booking-map .marker-cluster-small,
 .booking-map .marker-cluster-small {
   background-color: rgba(var(--thm-primary-rgb), 0.6);
 }
-
+.controller-booking-map .marker-cluster-small div,
 .booking-map .marker-cluster-small div {
   background-color: rgba(var(--thm-primary-rgb), 0.6);
   color: #fff;
   font-size: 15px;
   font-weight: 500;
 }
-
+.add-ambulance-map {
+  height: 250px;
+}
+@media (max-width: 767px) {
+  .add-ambulance-map {
+    height: 500px;
+  }
+  .add-ambulance-map .leaflet-touch .leaflet-control-geocoder {
+    max-width: 210px;
+    display: flex;
+    align-items: center;
+  }
+}
 .booking-map .leaflet-control-geocoder-icon,
 .add-ambulance-map .leaflet-control-geocoder-icon {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M12.2 13l3.4 6.6c.6 1.1 2.5-.4 2-1.2l-4-6.2z'/%3E%3Ccircle cx='10.8' cy='8.9' r='3.9' fill='none' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E");
@@ -501,6 +602,10 @@ button.button-white:hover,
   z-index: 1;
   text-align: center;
   background-color: var(--thm-primary);
+}
+.booking-card-top h2 {
+  white-space: break-spaces;
+  word-break: break-all;
 }
 
 .booking-card-bottom {
@@ -558,14 +663,50 @@ button.button-white:hover,
 .booking-card-ambulance-details {
   border-top: 1px solid var(--thm-border);
 }
+.booking-current-map {
+  margin-top: 60px;
+  height: 300px;
+}
+@media(max-width: 767px) {
+  .booking-current-map {
+    height: 700px;
+    padding: 20px;
+  }
+}
+.controller-booking-map {
+  height: 700px;
+  margin-left: 400px;
+}
+
+@media(max-width: 767px) {
+  .controller-booking-map {
+    margin-left: 0;
+    margin-top: 40px;
+    padding: 20px;
+  }
+}
 
 .route-link {
   font-size: 22px;
   padding: 10px 18px;
 }
-
+.ambulance-route-map {
+  height: 600px;
+}
+@media (max-width: 767px) {
+  .ambulance-route-map {
+    height: 800px;
+    padding: 20px;
+  }
+}
 .ambulance-route-map .leaflet-routing-alt {
   max-height: 410px;
+}
+
+@media (max-width: 767px) {
+  .ambulance-route-map .leaflet-routing-alt {
+    max-width: 300px;
+  }
 }
 
 .ambulance-route-map .leaflet-routing-alt table th,
@@ -573,4 +714,96 @@ button.button-white:hover,
   padding: 2px;
   vertical-align: middle;
   border: 0;
+}
+
+/* mobile header */
+.mobile-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1041;
+  pointer-events: none;
+}
+
+.mobile-header.active {
+  pointer-events: all;
+}
+
+.mobile-logo {
+  margin-bottom: 20px;
+  max-width: 140px;
+}
+
+.mobile-header-inner {
+  max-width: 400px;
+  background-color: var(--thm-color);
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  overflow: auto;
+  transform: translateX(-400px);
+  transition: all 500ms ease;
+  transition-delay: 0ms;
+}
+
+.mobile-header.active .mobile-header-inner {
+  transform: translateX(0);
+  transition-delay: 500ms;
+}
+
+.mobile-nav-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  transform: translateX(100%);
+  transition: all 500ms ease;
+  transition-delay: 500ms;
+}
+
+.mobile-header.active .mobile-nav-overlay {
+  transform: translateX(0);
+  transition-delay: 0ms;
+}
+
+.mobile-header .close-btn {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  background-color: #fff;
+  z-index: 2;
+  right: 20px;
+  cursor: pointer;
+  top: 20px;
+}
+
+.mobile-header .close-btn span {
+  position: absolute;
+  height: 2px;
+  width: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background-color: var(--thm-color);
+}
+
+.mobile-header .close-btn span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.mobile-header ul li a {
+  display: block;
+  padding: 15px;
+  border-bottom: 1px solid var(--thm-border);
+}
+
+.mobile-header ul li a:hover,
+.mobile-header ul li a.active {
+  background-color: #fff;
+  color: var(--thm-primary);
 }

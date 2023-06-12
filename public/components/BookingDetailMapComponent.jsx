@@ -90,7 +90,7 @@ export default function BookingDetailMapComponent({ bookingId }) {
         </div>
 
         {bookingDetails && hospitalDetails && ambulanceDetails && bookingDetails?.status != 'pending' &&
-          <div className='booking-current-map' style={{ marginTop: '60px', height: '300px' }}>
+          <div className='booking-current-map'>
             <BookingDetailCurrentLocation
               bookingDetails={bookingDetails}
               ambulanceDetails={ambulanceDetails}

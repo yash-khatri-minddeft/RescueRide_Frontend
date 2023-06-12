@@ -78,7 +78,7 @@ export default function AddHospital({ show, hospitals, setHospitals, onHide, loc
 						</div>
 						{locationEnabled ?
 							<div className="col-lg-12">
-								<div className="add-ambulance-map" style={{ height: '250px' }}>
+								<div className="add-ambulance-map">
 									<MapContainer center={[latitudeState, longitudeState]} zoom={12}>
 										<TileLayer
 											url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
