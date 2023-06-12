@@ -528,13 +528,13 @@ button.button-white:hover,
   height: 100%;
 }
 
-.controller-booking-map .marker-cluster-small,
-.booking-map .marker-cluster-small {
+.controller-booking-map .marker-cluster,
+.booking-map .marker-cluster {
   background-color: rgba(var(--thm-primary-rgb), 0.6);
 }
 
-.controller-booking-map .marker-cluster-small div,
-.booking-map .marker-cluster-small div {
+.controller-booking-map .marker-cluster div,
+.booking-map .marker-cluster div {
   background-color: rgba(var(--thm-primary-rgb), 0.6);
   color: #fff;
   font-size: 15px;
