@@ -42,10 +42,13 @@ export default function AmbulanceLocationComponent({ ambulanceId }) {
     }
     if (ambulanceId) {
       console.log(ambulanceId)
-      setInterval(() => {
+      const updateLocation = setInterval(() => {
         getLocation()
       }, 5000)
       getLocation()
+      return() => {
+        clearInterval(updateLocation);
+      }
     }
   }, [socket, ambulanceId])
 
