@@ -14,7 +14,8 @@ export default function AmbulanceLocationComponent({ ambulanceId }) {
   useEffect(() => {
     socket.connect();
     const getLocation = () => {
-      lastLatitude = localStorage.getItem('lastLatitude'), lastLongitude = localStorage.getItem('lastLongitude');
+      lastLatitude = localStorage.getItem('lastLatitude')
+      lastLongitude = localStorage.getItem('lastLongitude');
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           const newPosition = {
